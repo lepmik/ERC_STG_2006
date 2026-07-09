@@ -1,0 +1,75 @@
+\documentclass[border=1pt]{standalone}
+\usepackage{pgfgantt}
+\usepackage{xcolor}
+
+% FIND WP colours
+\definecolor{wp1col}{RGB}{66,133,244}   % blue
+\definecolor{wp2col}{RGB}{234,67,53}    % red
+\definecolor{wp3col}{RGB}{251,188,5}    % yellow
+\definecolor{mgcol}{RGB}{52,168,83}     % green (management/dissemination)
+
+\begin{document}
+\begin{ganttchart}[
+    vgrid={*{3}{dotted}, {black, dashed}},
+    hgrid,
+    x unit=0.50cm,
+    y unit title=0.42cm,
+    y unit chart=0.42cm,
+    title label font=\small,
+    bar label font=\small\sffamily,
+    group label font=\small\bfseries\sffamily,
+    bar height=0.58,
+    group top shift=0.4,
+    group right shift=0,
+    group left shift=0,
+    group peaks height=0.15,
+    bar/.append style={rounded corners=1pt},
+    bar incomplete/.append style={fill=gray!30},
+    canvas/.append style={fill=white},
+    title/.append style={fill=gray!15},
+    bar label node/.append style={text width=5.0cm, align=right, font=\small\sffamily}
+]{1}{20}
+
+% ---- header ----
+\gantttitle{\textbf{Year 1}}{4}
+\gantttitle{\textbf{Year 2}}{4}
+\gantttitle{\textbf{Year 3}}{4}
+\gantttitle{\textbf{Year 4}}{4}
+\gantttitle{\textbf{Year 5}}{4} \\
+\gantttitle{Q1}{1}\gantttitle{Q2}{1}\gantttitle{Q3}{1}\gantttitle{Q4}{1}%
+\gantttitle{Q1}{1}\gantttitle{Q2}{1}\gantttitle{Q3}{1}\gantttitle{Q4}{1}%
+\gantttitle{Q1}{1}\gantttitle{Q2}{1}\gantttitle{Q3}{1}\gantttitle{Q4}{1}%
+\gantttitle{Q1}{1}\gantttitle{Q2}{1}\gantttitle{Q3}{1}\gantttitle{Q4}{1}%
+\gantttitle{Q1}{1}\gantttitle{Q2}{1}\gantttitle{Q3}{1}\gantttitle{Q4}{1} \\
+
+% ---- WP1: Temporal Predictive Coding ----
+\ganttgroup[group/.append style={fill=wp1col!60}]{\textbf{WP1: Temporal PC + Memory (PhD1)}}{1}{12} \\
+\ganttbar[bar/.append style={fill=wp1col!70}]{T1.1 Temporal Benchmarks \& Scaling}{1}{6} \\
+\ganttbar[bar/.append style={fill=wp1col!70}]{T1.2 Inference Depth \& Capacity}{4}{9} \\
+\ganttbar[bar/.append style={fill=wp1col!70}]{T1.3 Hierarchical Temporal Compression}{7}{12} \\[grid]
+
+% ---- WP2: Causal Reasoning ----
+\ganttgroup[group/.append style={fill=wp2col!60}]{\textbf{WP2: Causal Reasoning (PD)}}{5}{16} \\
+\ganttbar[bar/.append style={fill=wp2col!70}]{T2.1 Action-Augmented tPC}{5}{8} \\
+\ganttbar[bar/.append style={fill=wp2col!70}]{T2.2 Subspace Reasoning}{7}{11} \\
+\ganttbar[bar/.append style={fill=wp2col!70}]{T2.3 Causal World Model}{9}{13} \\
+\ganttbar[bar/.append style={fill=wp2col!70}]{T2.4 Orchestration Ablation \& Eval.}{12}{16} \\[grid]
+
+% ---- WP3: Long-Horizon Open-Ended ----
+\ganttgroup[group/.append style={fill=wp3col!80}]{\textbf{WP3: Long-Horizon Testing (PhD2)}}{9}{20} \\
+\ganttbar[bar/.append style={fill=wp3col!80}]{T3.1 Environment \& Curriculum}{9}{12} \\
+\ganttbar[bar/.append style={fill=wp3col!80}]{T3.2 Long-Horizon Active Inference}{11}{16} \\
+\ganttbar[bar/.append style={fill=wp3col!80}]{T3.3 Causal \& Adaptive Analysis}{14}{20} \\[grid]
+
+% ---- Management & Dissemination ----
+\ganttgroup[group/.append style={fill=mgcol!50}]{\textbf{Management \& Dissemination}}{1}{20} \\
+\ganttbar[bar/.append style={fill=mgcol!60}]{Publications \& Conferences}{1}{20} \\
+\ganttbar[bar/.append style={fill=mgcol!60}]{Open-Source Releases}{4}{20} \\
+
+% ---- Milestones ----
+\ganttmilestone[milestone/.append style={fill=wp1col, shape=diamond}]{WP1 complete}{12} \\
+\ganttmilestone[milestone/.append style={fill=wp2col, shape=diamond}]{WP2 complete}{16} \\
+\ganttmilestone[milestone/.append style={fill=wp3col!90, shape=diamond}]{WP3 complete / Final Report}{20}
+
+\end{ganttchart}
+\end{document}

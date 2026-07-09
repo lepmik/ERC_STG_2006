@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 682.35187 278"
+   version="1.1"
+   id="svg21"
+   sodipodi:docname="passion-concept-figure (1).svg"
+   width="682.35187"
+   height="278"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   inkscape:export-filename="passion-concept-figure.pdf"
+   inkscape:export-xdpi="600"
+   inkscape:export-ydpi="600"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview21"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.4928696"
+     inkscape:cx="561.00011"
+     inkscape:cy="230.76363"
+     inkscape:window-width="3440"
+     inkscape:window-height="1440"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg21" />
+  <rect
+     x="253.02751"
+     y="0.49999499"
+     width="179.00002"
+     height="277"
+     rx="4.9999995"
+     fill="#e8f5e9"
+     stroke="#a5d6a7"
+     stroke-width="0.99999"
+     id="rect11"
+     ry="5"
+     style="fill:#fff3e0;fill-opacity:1;stroke:#ffd698;stroke-opacity:1" />
+  <rect
+     x="451.85187"
+     y="0.49999499"
+     width="230"
+     height="277"
+     rx="4.9999995"
+     fill="#e8f5e9"
+     stroke="#a5d6a7"
+     stroke-width="0.999989"
+     id="rect10-1"
+     ry="5" />
+  <!-- Background -->
+  <!-- Title -->
+  <!-- Main Components - Container -->
+  <!-- Traditional Training (Left Side) -->
+  <!-- FP16/BF16 box -->
+  <!-- High Precision Operations -->
+  <!-- Energy and Resources -->
+  <text
+     x="567.15326"
+     y="196.85831"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text3-1">Outcomes</text>
+  <g
+     id="g10"
+     transform="translate(7.5122528,5.4051883)">
+    <rect
+       x="-7.0122528"
+       y="-4.9051876"
+       width="229.99998"
+       height="277"
+       rx="4.9999995"
+       fill="#ffebee"
+       stroke="#ffcdd2"
+       stroke-width="1"
+       id="rect6-0"
+       ry="5" />
+    <text
+       x="108.32758"
+       y="11.55078"
+       font-family="Arial"
+       font-size="16px"
+       font-weight="bold"
+       text-anchor="middle"
+       id="text3">Traditional Training</text>
+    <text
+       x="107.99555"
+       y="191.45312"
+       font-family="Arial"
+       font-size="16px"
+       font-weight="bold"
+       text-anchor="middle"
+       id="text3-6">Challenges</text>
+    <rect
+       x="0.48773956"
+       y="27.648438"
+       width="215"
+       height="60"
+       rx="5"
+       fill="#e1f5fe"
+       stroke="#81d4fa"
+       stroke-width="0.999997"
+       id="rect4"
+       ry="5"
+       style="fill:#ff7575;fill-opacity:0.592105;stroke:none" />
+    <text
+       x="107.89545"
+       y="62.648438"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text4">FP16/BF16 Computation</text>
+    <rect
+       x="0.48773956"
+       y="107.64844"
+       width="215"
+       height="60"
+       rx="5"
+       fill="#e1f5fe"
+       stroke="#81d4fa"
+       stroke-width="0.999999"
+       id="rect5"
+       ry="5"
+       style="fill:#ff7575;fill-opacity:0.592105;stroke:none" />
+    <text
+       x="107.68354"
+       y="142.64844"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text5">Fixed Precision for All Layers</text>
+    <rect
+       x="0.48773956"
+       y="203.59866"
+       width="215"
+       height="60"
+       rx="5"
+       fill="#ffebee"
+       stroke="#ffcdd2"
+       stroke-width="0.999999"
+       id="rect6"
+       ry="5"
+       style="fill:#ff7575;fill-opacity:0.592105;stroke:none" />
+    <text
+       x="107.90913"
+       y="228.59866"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text6">High Energy Consumption</text>
+    <text
+       x="107.45454"
+       y="248.59866"
+       font-family="Arial"
+       font-size="14px"
+       text-anchor="middle"
+       id="text7">High Security Risk</text>
+  </g>
+  <!-- PASSION System (Right Side) -->
+  <!-- Hybrid Precision Architecture -->
+  <!-- Temporal Bitstream -->
+  <!-- Benefits -->
+  <text
+     x="567.0517"
+     y="17.053627"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     id="text8">PASSION System</text>
+  <rect
+     x="459.6142"
+     y="33.053627"
+     width="215"
+     height="60"
+     rx="5"
+     fill="#e8f5e9"
+     stroke="#a5d6a7"
+     stroke-width="0.999999"
+     id="rect8"
+     ry="5"
+     style="fill:#aad8ac;fill-opacity:1;stroke:none" />
+  <text
+     x="566.84418"
+     y="58.053627"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text9">Hybrid Precision Architecture</text>
+  <text
+     x="566.96771"
+     y="78.053627"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text10">(Stochastic + Deterministic)</text>
+  <rect
+     x="459.6142"
+     y="113.05363"
+     width="215"
+     height="60"
+     rx="5"
+     fill="#e8f5e9"
+     stroke="#a5d6a7"
+     stroke-width="1"
+     id="rect10"
+     ry="5"
+     style="fill:#a5d6a7;fill-opacity:0.921569;stroke:none" />
+  <text
+     x="567.60638"
+     y="138.05362"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text11">Adaptive Bitstream Compression</text>
+  <text
+     x="566.96771"
+     y="158.05362"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     id="text12">(4-8 bit → 16-bit effective)</text>
+  <rect
+     x="459.6142"
+     y="209.00385"
+     width="215"
+     height="60"
+     rx="5"
+     fill="#e8f5e9"
+     stroke="#a5d6a7"
+     stroke-width="1"
+     id="rect7"
+     ry="5"
+     style="fill:#a5d6a7;fill-opacity:0.921569;stroke:none" />
+  <text
+     x="567.3056"
+     y="234.00385"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text13">50-60% Energy Reduction</text>
+  <text
+     x="566.83051"
+     y="254.00385"
+     font-family="Arial"
+     font-size="14px"
+     text-anchor="middle"
+     id="text14">Enhanced Security Robustness</text>
+  <!-- Transformation Arrow -->
+  <defs
+     id="defs14">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5 "
+         fill="#666666"
+         id="polygon14" />
+    </marker>
+  </defs>
+  <!-- Anti-Entropy Training Protocol Box -->
+  <!-- Continuous-bit ML -->
+  <!-- Bottom section with objectives -->
+  <!-- Objective boxes -->
+  <g
+     id="g9"
+     transform="translate(7.5122528,-10.594812)">
+    <rect
+       x="257.97827"
+       y="53.218021"
+       width="154.07396"
+       height="40.073959"
+       rx="4.2798324"
+       fill="#ffffff"
+       stroke="#dddddd"
+       stroke-width="0.926039"
+       id="rect18"
+       ry="4.2798324"
+       style="fill:#ffcc80;fill-opacity:0.74902;stroke:none" />
+    <text
+       x="335.01526"
+       y="78.254982"
+       font-family="Arial"
+       font-size="12px"
+       text-anchor="middle"
+       id="text18"
+       style="fill:#333333;fill-opacity:1;stroke:none">WP1: Hybrid Architecture</text>
+  </g>
+  <text
+     x="342.42499"
+     y="15.974715"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#333333"
+     id="text16"><tspan
+       style="font-weight:bold"
+       id="tspan4">Continuous-bit ML</tspan></text>
+  <text
+     x="342.14374"
+     y="33.020359"
+     font-family="Arial"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#333333"
+     id="text17"><tspan
+       style="font-weight:bold"
+       id="tspan5">Framework</tspan></text>
+  <g
+     id="g8"
+     transform="translate(7.5122528,-8.5280547)">
+    <rect
+       x="257.97827"
+       y="109.9417"
+       width="154.07396"
+       height="40.073959"
+       rx="4.2798324"
+       fill="#ffffff"
+       stroke="#dddddd"
+       stroke-width="0.926039"
+       id="rect19"
+       ry="4.2798324"
+       style="fill:#ffd698;fill-opacity:1;stroke:none" />
+    <text
+       x="335.01523"
+       y="134.97865"
+       font-family="Arial"
+       font-size="12px"
+       text-anchor="middle"
+       id="text19">WP2: Stochastic Sampling</text>
+  </g>
+  <g
+     id="g7"
+     transform="translate(7.5122528,-6.4612857)">
+    <rect
+       x="257.97827"
+       y="166.66537"
+       width="154.07396"
+       height="40.073959"
+       rx="4.2798324"
+       fill="#ffffff"
+       stroke="#dddddd"
+       stroke-width="0.926039"
+       id="rect20"
+       ry="4.2798324"
+       style="fill:#ffd698;fill-opacity:1;stroke:none" />
+    <text
+       x="335.01526"
+       y="191.70233"
+       font-family="Arial"
+       font-size="12px"
+       text-anchor="middle"
+       id="text20">WP3: Anti-Entropy Protocol</text>
+  </g>
+  <g
+     id="g11"
+     transform="translate(7.5122528,5.4051883)">
+    <rect
+       x="258.00592"
+       y="213.58934"
+       width="154.01865"
+       height="40.018642"
+       rx="4.8130827"
+       fill="#ffffff"
+       stroke="#dddddd"
+       stroke-width="0.981357"
+       id="rect21"
+       ry="4.8130827"
+       style="fill:#ffd698;fill-opacity:1;stroke:none" />
+    <text
+       x="335.35504"
+       y="238.59868"
+       font-family="Arial"
+       font-size="12px"
+       text-anchor="middle"
+       id="text21"
+       style="stroke:none">WP4: Validation</text>
+  </g>
+</svg>

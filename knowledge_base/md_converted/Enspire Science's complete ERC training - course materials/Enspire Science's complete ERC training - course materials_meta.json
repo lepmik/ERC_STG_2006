@@ -1,0 +1,505 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Enspire Science ERC training\nCourse materials",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          194.98046874999997,
+          74.826171875
+        ],
+        [
+          402.5210266113281,
+          74.826171875
+        ],
+        [
+          402.5210266113281,
+          111.5
+        ],
+        [
+          194.98046874999997,
+          111.5
+        ]
+      ]
+    },
+    {
+      "title": "Introduction",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          56.45703124999999,
+          247.0908203125
+        ],
+        [
+          129.63674926757812,
+          247.0908203125
+        ],
+        [
+          129.63674926757812,
+          259.175048828125
+        ],
+        [
+          56.45703124999999,
+          259.175048828125
+        ]
+      ]
+    },
+    {
+      "title": "The ERC PI",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          56.69999694824219,
+          482.2587890625
+        ],
+        [
+          114.71271514892578,
+          482.2587890625
+        ],
+        [
+          114.71271514892578,
+          495.5749816894531
+        ],
+        [
+          56.69999694824219,
+          495.5749816894531
+        ]
+      ]
+    },
+    {
+      "title": "The ERC project",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          56.45703124999999,
+          73.181640625
+        ],
+        [
+          145.3052520751953,
+          73.181640625
+        ],
+        [
+          145.3052520751953,
+          86.300048828125
+        ],
+        [
+          56.45703124999999,
+          86.300048828125
+        ]
+      ]
+    },
+    {
+      "title": "Panel selection",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          56.45703124999999,
+          518.4384765625
+        ],
+        [
+          144.9379425048828,
+          518.4384765625
+        ],
+        [
+          144.9379425048828,
+          530.8249816894531
+        ],
+        [
+          56.45703124999999,
+          530.8249816894531
+        ]
+      ]
+    },
+    {
+      "title": "The evaluation process",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          55.29296874999999,
+          636.43359375
+        ],
+        [
+          190.2943572998047,
+          636.43359375
+        ],
+        [
+          190.2943572998047,
+          647.5999450683594
+        ],
+        [
+          55.29296874999999,
+          647.5999450683594
+        ]
+      ]
+    },
+    {
+      "title": "ERC Synergy",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          56.16601562499999,
+          157.875
+        ],
+        [
+          129.84518432617188,
+          157.875
+        ],
+        [
+          129.84518432617188,
+          169.7000732421875
+        ],
+        [
+          56.16601562499999,
+          169.7000732421875
+        ]
+      ]
+    },
+    {
+      "title": "EIC Pathfinder Open",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          55.87499999999999,
+          273.814453125
+        ],
+        [
+          171.42921447753906,
+          273.814453125
+        ],
+        [
+          171.42921447753906,
+          286.4749755859375
+        ],
+        [
+          55.87499999999999,
+          286.4749755859375
+        ]
+      ]
+    },
+    {
+      "title": "Technical aspects",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          55.87499999999999,
+          356.041015625
+        ],
+        [
+          161.49472045898438,
+          356.041015625
+        ],
+        [
+          161.49472045898438,
+          368.75006103515625
+        ],
+        [
+          55.87499999999999,
+          368.75006103515625
+        ]
+      ]
+    },
+    {
+      "title": "Grant writing tips",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          55.29296874999999,
+          543.5249938964844
+        ],
+        [
+          157.1747589111328,
+          543.5249938964844
+        ],
+        [
+          157.1747589111328,
+          554.6181640625
+        ],
+        [
+          55.29296874999999,
+          554.6181640625
+        ]
+      ]
+    },
+    {
+      "title": "Our services",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          55.29296874999999,
+          106.4833984375
+        ],
+        [
+          148.8863525390625,
+          106.4833984375
+        ],
+        [
+          148.8863525390625,
+          122.1500244140625
+        ],
+        [
+          55.29296874999999,
+          122.1500244140625
+        ]
+      ]
+    },
+    {
+      "title": "Standard Review",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          55.87499999999999,
+          144.71875
+        ],
+        [
+          155.75628662109375,
+          144.71875
+        ],
+        [
+          155.75628662109375,
+          156.5001220703125
+        ],
+        [
+          55.87499999999999,
+          156.5001220703125
+        ]
+      ]
+    },
+    {
+      "title": "Deep Dive Review",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          56.45703124999999,
+          244.6240234375
+        ],
+        [
+          158.7791748046875,
+          244.6240234375
+        ],
+        [
+          158.7791748046875,
+          256.0250244140625
+        ],
+        [
+          56.45703124999999,
+          256.0250244140625
+        ]
+      ]
+    },
+    {
+      "title": "ERC Interview preparation",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          56.45703124999999,
+          343.2958984375
+        ],
+        [
+          206.48342895507812,
+          343.2958984375
+        ],
+        [
+          206.48342895507812,
+          355.5501403808594
+        ],
+        [
+          56.45703124999999,
+          355.5501403808594
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          356
+        ],
+        [
+          "Line",
+          27
+        ],
+        [
+          "ListItem",
+          11
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "PageFooter",
+          3
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "Picture",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          391
+        ],
+        [
+          "Line",
+          37
+        ],
+        [
+          "ListItem",
+          16
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "ListGroup",
+          3
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "Picture",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          367
+        ],
+        [
+          "Line",
+          35
+        ],
+        [
+          "ListItem",
+          12
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "ListGroup",
+          4
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "Picture",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          279
+        ],
+        [
+          "Line",
+          16
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "PageFooter",
+          4
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "Picture",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/Enspire Science's complete ERC training - course materials"
+}
