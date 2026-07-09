@@ -1,0 +1,57 @@
+\documentclass[border=5pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{xcolor}
+
+% Colours (match prelim_results / WP palette)
+\definecolor{pamcol}{RGB}{45,106,79}     % PAM green
+\definecolor{basecol}{RGB}{160,160,168}  % baseline gray
+\definecolor{wpblue}{RGB}{66,133,244}
+\definecolor{wpred}{RGB}{234,67,53}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\sffamily,
+    bar/.style={draw=#1!80, fill=#1!85, rounded corners=1pt},
+    val/.style={font=\scriptsize\sffamily\bfseries, color=black!75},
+    axis/.style={font=\scriptsize\sffamily, color=black!60},
+    bench/.style={font=\scriptsize\sffamily\bfseries, color=black!80, align=center},
+    sub/.style={font=\tiny\sffamily, color=black!55, align=center},
+    wpbadge/.style={font=\tiny\sffamily\bfseries, rounded corners=2pt,
+                    fill=#1!18, draw=#1!50, inner sep=2pt},
+]
+
+% y scale: 100% = 2.6cm
+\pgfmathsetmacro{\ys}{0.026}
+\newcommand{\bargroup}[7]{%
+  % #1 x origin, #2 PAM val, #3 baseline val, #4 benchmark, #5 subtitle, #6 badge col, #7 badge text
+  \fill[pamcol!85, draw=pamcol!80, rounded corners=1pt]  (#1,0)      rectangle ++(0.85, #2*\ys);
+  \fill[basecol!85, draw=basecol!90, rounded corners=1pt] (#1+1.05,0) rectangle ++(0.85, #3*\ys);
+  \node[val] at (#1+0.425, #2*\ys+0.22) {#2\%};
+  \node[val, color=black!55] at (#1+1.475, #3*\ys+0.22) {#3\%};
+  \node[bench, anchor=north] at (#1+0.95, -0.12) {#4};
+  \node[sub,  anchor=north]  at (#1+0.95, -0.52) {#5};
+  \node[wpbadge=#6, anchor=south west] at (#1-0.15, 100*\ys+0.55) {#7};
+}
+
+% baseline (x-axis)
+\draw[black!40, thick] (-0.4,0) -- (12.2,0);
+
+% Group 1 — WP1 foundation: sequence recall under noise
+\bargroup{0.3}{98.1}{56}{Exact recall @ $\sigma{=}0.4$}{PAM vs.\ feedforward CNN-KM\\($K{=}100$ items)}{wpblue}{WP1}
+
+% Group 2 — WP1: real-world continual learning
+\bargroup{4.6}{100}{44.5}{CORe50 re-encounter}{PAM vs.\ S4D\\(50 objects, $T{=}10{,}000$)}{wpblue}{WP1}
+
+% Group 3 — WP2: compositional program synthesis
+\bargroup{8.9}{24.7}{12}{ARC exact match}{PAMNCA (1.47M params)\\vs.\ GPT-4o}{wpred}{WP2}
+
+% Legend
+\node[anchor=west, font=\scriptsize\sffamily] (leg) at (-0.4, 100*\ys+1.15) {};
+\fill[pamcol!85, rounded corners=1pt] (-0.4, 100*\ys+1.05) rectangle ++(0.3,0.22);
+\node[anchor=west, font=\scriptsize\sffamily, color=black!75] at (0.0, 100*\ys+1.16) {PAM (ours)};
+\fill[basecol!85, rounded corners=1pt] (2.0, 100*\ys+1.05) rectangle ++(0.3,0.22);
+\node[anchor=west, font=\scriptsize\sffamily, color=black!75] at (2.4, 100*\ys+1.16) {Best comparison};
+
+\end{tikzpicture}
+\end{document}

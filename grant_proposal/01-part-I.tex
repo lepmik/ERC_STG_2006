@@ -11,7 +11,13 @@
 We live in time. Memory bridges past and present, enabling agents to learn from experience and make informed decisions. Humans develop internal world models for planning and reasoning; replicating this in machines is the next step toward flexible AI~\cite{lecun2022path}.
 Current AI struggles to generalise~\cite{razeghi2022impact}, lacking long-term memory~\cite{pasukonis2022evaluating}, causal understanding~\cite{richens2024robust}, and life-long learning without catastrophic forgetting~\cite{wang2024comprehensive}.
 
-Consider an agent managing a Factorio production chain. It discovers copper wire requires copper plates (step~2,000) and circuits require wire plus iron (step~8,000), then encounters a blueprint requiring 50 circuits at step~15,000. It must recall the dependency chain across $>$10,000 timesteps, reason causally about bottlenecks, and adapt its layout. Current systems cannot do this: transformers cannot attend across 10,000 steps~\cite{ni2023longterm}; SSMs compress dependencies into fixed-size state~\cite{gu2021s4}; MANNs lack causal models to identify bottlenecks~\cite{graves2016dnc}. \textbf{How can systems intelligently select what to retain, discard, and retrieve to learn across long temporal sequences?}
+Consider an agent managing a Factorio production chain (Figure~\ref{fig:factorio}). It discovers copper wire requires copper plates (step~2,000) and circuits require wire plus iron (step~8,000), then encounters a blueprint requiring 50 circuits at step~15,000. It must recall the dependency chain across $>$10,000 timesteps, reason causally about bottlenecks, and adapt its layout. Current systems cannot do this: transformers cannot attend across 10,000 steps~\cite{ni2023longterm}; SSMs compress dependencies into fixed-size state~\cite{gu2021s4}; MANNs lack causal models to identify bottlenecks~\cite{graves2016dnc}. \textbf{How can systems intelligently select what to retain, discard, and retrieve to learn across long temporal sequences?}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/factorio-storyboard.pdf}
+  \caption{\textbf{The capability gap FIND addresses.} An agent discovers dependencies thousands of steps apart and must later recall and compose them under a new goal. This requires selective storage, content-addressable recall, and causal reasoning across $>$10,000 timesteps---beyond current architectures (bottom).}\label{fig:factorio}
+\end{figure}
 
 \subsection{Ground-breaking nature and impact}
 
@@ -102,9 +108,17 @@ Life-long learning requires managing information without catastrophic forgetting
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth, clip]{figures/pam-architecture.pdf}
-  \caption{\textbf{PAM architecture.} Sensory input $x_t$ is encoded into latent state $z_t$. A ProgramEncoder infers routing weights via self-attention over the context window. Gumbel-softmax routing selects among four specialist modules (Trend, Seasonal, Residual, Context), each with dedicated Kanerva memory using HDC binding for content-addressable read/write. The routing is applied iteratively over $n$ stages. Module outputs are fused into a prediction $\hat{x}_{t+1}$; prediction errors drive parameter updates.}\label{fig:arch}
+  \caption{\textbf{PAM architecture.} Sensory input $x_t$ is encoded into latent state $z_t$. A ProgramEncoder infers routing weights via self-attention over the context window. Gumbel-softmax routing selects among four specialist modules (Trend, Seasonal, Residual, Context), each with dedicated Kanerva memory using HDC binding for content-addressable read/write. The routing is applied iteratively over $n$ stages. Module outputs are fused into a prediction $\hat{x}_{t+1}$; prediction errors drive parameter updates. The module inventory is task-dependent (shown here for temporal forecasting).}\label{fig:arch}
 \end{figure}
 
+\noindent\textit{Preliminary results.}
+The BioAI group has developed FIND's foundations through neurocomputational memory research: grid/place/border cells emerge spontaneously in AI agents~\cite{schoyen2023coherently}, orthogonal remapping encodes context~\cite{pettersen2024nips,schoyen2025plos,pettersen2024elife}, NCA enables self-organizing module communication~\cite{kvalsund2026sensor}, one-shot memory transfer~\cite{guichard2025engramnca}, and abstract reasoning~\cite{guichard2025arc}. The tPC-KM system achieves 98.1\% exact recall at $\sigma{=}0.4$ ($1.75{\times}$ over feedforward) and $3.75{\times}$ less forgetting than tPC-alone (Figure~\ref{fig:prelim}).
+
+\textbf{WP1: Memory and continual learning.} Beyond the MNIST benchmark, PAM achieves \textbf{100\% recognition accuracy} on CORe50 (50 real-world objects, $T{=}10{,}000$ steps) with both pretrained and raw pixel features. On the official CORe50-NI online continual learning protocol (test-then-train, single pass, no task boundaries), PAM achieves \textbf{98.2\% online accuracy} across 8 experiences (120K samples) in 55 seconds---$12{\times}$ faster than gradient-based replay methods---with zero catastrophic forgetting by construction and positive backward transfer. With PAM's own tPC encoder (zero pretraining), the system reaches \textbf{70.3\% per-experience accuracy} while learning both representations and memory online---the only continual learning system that operates without a pretrained backbone.
+
+% NOTE: prelim_results.pdf must be regenerated in the experiments repo
+% (make_prelim_fig.py now renders Panel A as a bar chart at sigma=0.4 and fixes
+% the "PM" legend label to "PAM"). Update caption (A) wording when swapped in.
 \begin{wrapfigure}{l}{0.6\textwidth}
   \includegraphics[width=0.99\linewidth,keepaspectratio=true]{figures/prelim_results.pdf}
   \caption{\textbf{Preliminary PAM results (WP1 foundation).}
@@ -115,12 +129,13 @@ Life-long learning requires managing information without catastrophic forgetting
   \vspace{-3mm}
 \end{wrapfigure}
 
-\noindent\textit{Preliminary results.}
-The BioAI group has developed FIND's foundations through neurocomputational memory research: grid/place/border cells emerge spontaneously in AI agents~\cite{schoyen2023coherently}, orthogonal remapping encodes context~\cite{pettersen2024nips,schoyen2025plos,pettersen2024elife}, NCA enables self-organizing module communication~\cite{kvalsund2026sensor}, one-shot memory transfer~\cite{guichard2025engramnca}, and abstract reasoning~\cite{guichard2025arc}. The tPC-KM system achieves 98.1\% exact recall at $\sigma{=}0.4$ ($1.75{\times}$ over feedforward) and $3.75{\times}$ less forgetting than tPC-alone (Figure~\ref{fig:prelim}).
-
-\textbf{WP1: Memory and continual learning.} Beyond the MNIST benchmark, PAM achieves \textbf{100\% recognition accuracy} on CORe50 (50 real-world objects, $T{=}10{,}000$ steps) with both pretrained and raw pixel features. On the official CORe50-NI online continual learning protocol (test-then-train, single pass, no task boundaries), PAM achieves \textbf{98.2\% online accuracy} across 8 experiences (120K samples) in 55 seconds---$12{\times}$ faster than gradient-based replay methods---with zero catastrophic forgetting by construction and positive backward transfer. With PAM's own tPC encoder (zero pretraining), the system reaches \textbf{70.3\% per-experience accuracy} while learning both representations and memory online---the only continual learning system that operates without a pretrained backbone.
-
 \textbf{WP2: Compositional reasoning.} We validated PAM's program synthesis capabilities on the Abstraction and Reasoning Corpus (ARC)~\cite{chollet2019arc}. Our PAMNCA system---a neural cellular automaton with distributed PAM memory (1.47M parameters)---achieves \textbf{24.7\% exact match} (321/1302 episodes) through test-time training, approximately $2{\times}$ GPT-4o's 12\% with $>$1000$\times$ fewer parameters. Memory ablations show the distributed memory module contributes 30--43\% of performance, with its contribution \textit{growing} with compute budget. FOMAML meta-learning provides a $2.5{\times}$ effective compute speedup, validating T2.2's meta-learning approach. Separately, our HDC system achieves 100\% on direct analogies (with 200 distractors), 99.5\% on CLUTRR 2-hop relational reasoning, and 100\% on Raven's Progressive Matrices.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/headline-results.pdf}
+  \caption{\textbf{Headline preliminary results.} PAM against the strongest comparison on each benchmark: noisy sequence recall at $\sigma{=}0.4$ (WP1 foundation), CORe50 re-encounter recognition after $T{=}10{,}000$ steps (WP1), and ARC program synthesis via test-time training (WP2).}\label{fig:headline}
+\end{figure}
 
 PAM makes two testable predictions unique to its architecture: (1)~non-parametric memory achieves \textit{mathematically guaranteed} zero forgetting while maintaining recognition accuracy---our CORe50 experiments confirm 100\% recognition versus the S4D baseline's 44.5\% re-encounter accuracy; (2)~distributed memory is \textit{necessary} for program synthesis via test-time adaptation, with its contribution growing with task complexity---our PAMNCA ablations support this (30\% at TTT=500, 43\% at TTT=1000).
 
