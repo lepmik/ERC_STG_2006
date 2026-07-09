@@ -27,7 +27,8 @@
     bar incomplete/.append style={fill=gray!30},
     canvas/.append style={fill=white},
     title/.append style={fill=gray!15},
-    bar label node/.append style={text width=5.0cm, align=right, font=\small\sffamily}
+    bar label node/.append style={text width=6.6cm, align=right, font=\small\sffamily},
+    milestone label node/.append style={text width=6.6cm, align=right, font=\small\sffamily\itshape}
 ]{1}{20}
 
 % ---- header ----
@@ -66,10 +67,12 @@
 \ganttbar[bar/.append style={fill=mgcol!60}]{Publications \& Conferences}{1}{20} \\
 \ganttbar[bar/.append style={fill=mgcol!60}]{Open-Source Releases}{4}{20} \\
 
-% ---- Milestones ----
-\ganttmilestone[milestone/.append style={fill=wp1col, shape=diamond}]{WP1 complete}{12} \\
-\ganttmilestone[milestone/.append style={fill=wp2col, shape=diamond}]{WP2 complete}{16} \\
-\ganttmilestone[milestone/.append style={fill=wp3col!90, shape=diamond}]{WP3 complete / Final Report}{20}
+% ---- Milestones (match M1--M5 in text) ----
+\ganttmilestone[milestone/.append style={fill=wp1col, shape=diamond}]{M1: Tier-2 benchmarks complete}{4} \\
+\ganttmilestone[milestone/.append style={fill=wp2col, shape=diamond}]{M2: Compositional reasoning prototype}{6} \\
+\ganttmilestone[milestone/.append style={fill=wp1col, shape=diamond}]{M3: Memory Maze $T{=}10$K results}{10} \\
+\ganttmilestone[milestone/.append style={fill=wp3col!90, shape=diamond}]{M4: WP3 agent evaluation}{16} \\
+\ganttmilestone[milestone/.append style={fill=mgcol, shape=diamond}]{M5: Final evaluation \& open-source release}{20}
 
 \end{ganttchart}
 \end{document}

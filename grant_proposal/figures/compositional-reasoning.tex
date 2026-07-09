@@ -54,7 +54,7 @@
 };
 
 % ============ BOTTOM: Algebraic composition ============
-\node[below=1.5cm of g1, text width=10cm, align=center, font=\small\sffamily] (eq) {
+\node[below=0.7cm of g1, text width=10cm, align=center, font=\small\sffamily] (eq) {
 \textbf{Algebraic composition in HDC space:}\\[4pt]
 $\underbrace{z_{\text{out}}}_{\text{output}} = \underbrace{\text{col\_inc}}_{\text{colour LUT}} \circ \underbrace{\text{rot90}}_{\text{cell permutation}} (z_{\text{in}})
 \quad\equiv\quad
@@ -74,15 +74,16 @@ shift\_down & rot90 $\circ$ translate $\circ$ rot90$^3$ & 100\%
 \end{tabular}
 };
 
+% ============ BRACE: "Learned from support" ============
+% raised clear of the Input/After rot90/Output matrix labels
+\draw[decorate, decoration={brace, amplitude=5pt, raise=16pt}, thick, color=arrowcol]
+  (gin.north west) -- (gout.north east)
+  node[midway, above=23pt, font=\scriptsize\sffamily, color=arrowcol] (bracelbl) {Inferred program: (rot90, 1) $\to$ (col\_inc, 1)};
+
 % ============ SUPPORT PAIRS ANNOTATION ============
-\node[above=0.8cm of gin, text width=10cm, align=center, font=\small\sffamily\itshape, color=black!50] {
+\node[above=0.35cm of bracelbl, text width=10cm, align=center, font=\small\sffamily\itshape, color=black!50] {
   ProgramEncoder infers composition from $K{=}3$ support pairs (input $\to$ output examples)
 };
-
-% ============ BRACE: "Learned from support" ============
-\draw[decorate, decoration={brace, amplitude=5pt, raise=3pt}, thick, color=arrowcol]
-  (gin.north west) -- (gout.north east)
-  node[midway, above=10pt, font=\scriptsize\sffamily, color=arrowcol] {Inferred program: (rot90, 1) $\to$ (col\_inc, 1)};
 
 \end{tikzpicture}
 \end{document}

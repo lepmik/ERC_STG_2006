@@ -58,7 +58,7 @@ COLORS = {
     "lstm":      "#999999",
 }
 LABELS = {
-    "full":      "PM (tPC-KM-HDC)",
+    "full":      "PAM (tPC-KM-HDC)",
     "tpc_flat":  "tPC + flat KM",
     "tpc_alone": "tPC alone",
     "cnn_flat":  "CNN + flat KM",

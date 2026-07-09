@@ -66,23 +66,17 @@
 \draw[arr=routecol] (prog) -- node[above, label] {$w_1 \ldots w_n$} (route);
 
 % ============ SPECIALIST MODULES (stacked) ============
-\node[modbox=modcol1, right=1.5cm of route, yshift=1.1cm] (mod1) {Trend};
+\node[modbox=modcol1, right=1.5cm of route, yshift=1.1cm, align=center] (mod1) {Trend\\{\tiny\itshape Linear proj.}};
 \node[smallbox=modcol1, right=0.4cm of mod1] (mod1m) {Mem};
 
-\node[modbox=modcol2, below=0.25cm of mod1] (mod2) {Seasonal};
+\node[modbox=modcol2, below=0.25cm of mod1, align=center] (mod2) {Seasonal\\{\tiny\itshape Fourier + MLP}};
 \node[smallbox=modcol2, right=0.4cm of mod2] (mod2m) {Mem};
 
-\node[modbox=modcol3, below=0.25cm of mod2] (mod3) {Residual};
+\node[modbox=modcol3, below=0.25cm of mod2, align=center] (mod3) {Residual\\{\tiny\itshape Deep MLP}};
 \node[smallbox=modcol3, right=0.4cm of mod3] (mod3m) {Mem};
 
-\node[modbox=modcol4, below=0.25cm of mod3] (mod4) {Context};
+\node[modbox=modcol4, below=0.25cm of mod3, align=center] (mod4) {Context\\{\tiny\itshape Self-attn}};
 \node[smallbox=modcol4, right=0.4cm of mod4] (mod4m) {Mem};
-
-% Module internal labels
-\node[label, left=0.05cm of mod1, xshift=-0.1cm] {\tiny Linear proj.};
-\node[label, left=0.05cm of mod2, xshift=-0.1cm] {\tiny Fourier + MLP};
-\node[label, left=0.05cm of mod3, xshift=-0.1cm] {\tiny Deep MLP};
-\node[label, left=0.05cm of mod4, xshift=-0.1cm] {\tiny Self-attn};
 
 % Memory arrows
 \draw[arr=memcol, <->] (mod1) -- (mod1m);
@@ -135,7 +129,7 @@
 % ============ HDC MEMORY DETAIL (annotation) ============
 \node[draw, rounded corners=3pt, minimum height=1.6cm, minimum width=2.8cm,
       fill=memcol!8, draw=memcol!40, thick,
-      below=1.2cm of mod4m, xshift=0.5cm] (hdcbox) {};
+      below=1.3cm of mod4m, xshift=2.4cm] (hdcbox) {};
 \node[biglabel, memcol!80] at (hdcbox.north) [anchor=north, yshift=-2pt] {Kanerva Memory};
 \node[label, text width=2.5cm, align=center] at (hdcbox.center) [yshift=-2pt] {
   HDC binding\\
@@ -144,7 +138,7 @@
   read via $\alpha_i$
 };
 
-\draw[darr=memcol] (mod3m.south) -- ++(0,-0.3) -| (hdcbox.north);
+\draw[darr=memcol] (mod4m.east) -- ++(0.35,0) |- (hdcbox.west);
 
 % ============ ITERATION ARROW ============
 \draw[arr=routecol, very thick, dashed] (fuse.west) -- ++(-0.3,0) |- node[left, label, xshift=-2pt, yshift=10pt] {\textbf{Stage $s+1$}} (route.south);
