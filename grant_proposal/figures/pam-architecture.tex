@@ -61,7 +61,7 @@
 
 % ============ ROUTING ============
 \node[box=routecol, right=1.5cm of prog] (route) {Gumbel Routing};
-\node[label, below=0.05cm of route] {$n$ stages};
+\node[label, below=0.05cm of route] {$\times n$ inference stages};
 
 \draw[arr=routecol] (prog) -- node[above, label] {$w_1 \ldots w_n$} (route);
 
@@ -113,7 +113,7 @@
 
 % ============ OUTPUT ============
 \node[box=outputcol, left=1.0cm of dec] (output) {$\hat{x}_{t+1}$};
-\node[label, below=0.05cm of output] {Prediction};
+\node[label, below=0.05cm of output] {Prediction ($t{\to}t{+}1$, time)};
 
 \draw[arr=outputcol] (dec) -- (output);
 
@@ -124,24 +124,27 @@
 \draw[darr=errcol] (output) -- (err);
 
 % Error feedback arrow (curved, back to modules)
-\draw[darr=errcol] (err.east) -- ++(2.0,0) |- node[right, label, xshift=2pt, yshift=-8pt] {Update} (mod4.south west);
+\draw[darr=errcol] (err.east) -- ++(2.0,0) |- node[right, label, xshift=2pt, yshift=-8pt] {Update ($\nabla$, learning)} (mod4.south west);
 
-% ============ HDC MEMORY DETAIL (annotation) ============
-\node[draw, rounded corners=3pt, minimum height=1.6cm, minimum width=2.8cm,
+% ============ HDC MEMORY DETAIL (magnifier callout from one Mem chip) ============
+\node[draw, rounded corners=3pt, minimum height=1.9cm, minimum width=2.8cm,
       fill=memcol!8, draw=memcol!40, thick,
       below=1.3cm of mod4m, xshift=2.4cm] (hdcbox) {};
 \node[biglabel, memcol!80] at (hdcbox.north) [anchor=north, yshift=-2pt] {Kanerva Memory};
-\node[label, text width=2.5cm, align=center] at (hdcbox.center) [yshift=-2pt] {
+\node[font=\tiny\sffamily\itshape, color=memcol!70] at (hdcbox.north) [anchor=north, yshift=-14pt] {(per-module detail)};
+\node[label, text width=2.5cm, align=center] at (hdcbox.center) [yshift=-9pt] {
   HDC binding\\
   WTA write\\
   Content-addressable\\
   read via $\alpha_i$
 };
 
-\draw[darr=memcol] (mod4m.east) -- ++(0.35,0) |- (hdcbox.west);
+% zoom/magnifier expansion lines: this box details ONE Mem chip
+\draw[dashed, thin, memcol!45] (mod4m.north east) -- (hdcbox.north west);
+\draw[dashed, thin, memcol!45] (mod4m.south east) -- (hdcbox.west);
 
 % ============ ITERATION ARROW ============
-\draw[arr=routecol, very thick, dashed] (fuse.west) -- ++(-0.3,0) |- node[left, label, xshift=-2pt, yshift=10pt] {\textbf{Stage $s+1$}} (route.south);
+\draw[arr=routecol, very thick, dashed] (fuse.west) -- ++(-0.3,0) |- node[left, label, xshift=-2pt, yshift=10pt] {\textbf{Stage $s{+}1$}} (route.south);
 
 % ============ LEGEND / ANNOTATION ============
 \node[font=\scriptsize\sffamily, text width=3cm, align=left, anchor=north west]

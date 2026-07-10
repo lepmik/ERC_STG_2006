@@ -11,7 +11,7 @@
 We live in time. Memory bridges past and present, enabling agents to learn from experience and make informed decisions. Humans develop internal world models for planning and reasoning; replicating this in machines is the next step toward flexible AI~\cite{lecun2022path}.
 Current AI struggles to generalise~\cite{razeghi2022impact}, lacking long-term memory~\cite{pasukonis2022evaluating}, causal understanding~\cite{richens2024robust}, and life-long learning without catastrophic forgetting~\cite{wang2024comprehensive}.
 
-Consider an agent managing a Factorio production chain (Figure~\ref{fig:factorio}). It discovers copper wire requires copper plates (step~2,000) and circuits require wire plus iron (step~8,000), then encounters a blueprint requiring 50 circuits at step~15,000. It must recall the dependency chain across $>$10,000 timesteps, reason causally about bottlenecks, and adapt its layout. Current systems cannot do this: transformers cannot attend across 10,000 steps~\cite{ni2023longterm}; SSMs compress dependencies into fixed-size state~\cite{gu2021s4}; MANNs lack causal models to identify bottlenecks~\cite{graves2016dnc}. \textbf{How can systems intelligently select what to retain, discard, and retrieve to learn across long temporal sequences?}
+Consider an agent managing a Factorio production chain (Figure~\ref{fig:factorio}). It discovers copper wire requires copper plates (step~2,000) and circuits require wire plus iron (step~8,000), then encounters a blueprint requiring 50 circuits at step~15,000. It must recall the dependency chain across $>$10,000 timesteps, reason causally about bottlenecks, and adapt its layout. Current systems cannot do this: transformers cannot attend across 10,000 steps~\cite{ni2023longterm}; SSMs compress dependencies into fixed-size state~\cite{gu2021s4}; MANNs lack causal models to identify bottlenecks~\cite{graves2016dnc}. The challenge is to achieve this \textit{learned from raw experience}, without a pretrained model or hand-engineered memory plumbing. \textbf{How can systems intelligently select what to retain, discard, and retrieve to learn across long temporal sequences?}
 
 \begin{figure}[h!]
   \centering
@@ -33,7 +33,7 @@ FIND proposes a paradigm shift drawing inspiration from biological memory system
 \begin{itemize}[noitemsep,topsep=2pt]
   \item \textbf{Temporal predictive coding}~\cite{millidge2024temporal} with \textbf{distributed external memory}---not just recurrent state: prior tPC models store context solely in hidden activations; FIND externalises memory into content-addressable HDC slots persistent across thousands of timesteps.
   \item \textbf{Memory-augmented networks}~\cite{graves2016dnc} with \textbf{biologically-grounded iterative inference}---not single-pass read/write: prior MANNs use a single forward pass to address memory; FIND uses iterative predictive-coding inference to resolve ambiguous queries, yielding a $1.75{\times}$ recall advantage at $\sigma{=}0.4$.
-  \item \textbf{Hyperdimensional computing}~\cite{kanerva2009hyperdimensional} \textbf{embedded as the storage format of a gradient-trained system}---not as a standalone symbolic method: prior HDC systems operate outside neural training loops; FIND integrates HDC binding directly into the differentiable memory update, enabling end-to-end learning.
+  \item \textbf{Hyperdimensional computing}~\cite{kanerva2009hyperdimensional} \textbf{embedded as the storage format of a gradient-trained system}---not as a standalone symbolic method: prior HDC systems operate outside neural training loops, and even NVSA~\cite{hersche2023nvsa}, which couples vector-symbolic reasoning to a trained perception network, is a single-task inference pipeline without persistent temporal memory, continual learning, or action; FIND makes HDC the storage substrate of a continual, temporal system, integrating binding directly into the memory update.
 \end{itemize}
 
 \noindent Table~\ref{tab:positioning} situates FIND against the state of the art. No existing system combines all four capabilities.
@@ -51,6 +51,8 @@ Kanerva Machine~\cite{wu2018kanerva} & \checkmark & --- & --- & --- \\
 Temporal PC~\cite{millidge2024temporal} & --- & \checkmark & --- & --- \\
 HDC systems~\cite{kanerva2009hyperdimensional} & --- & --- & \checkmark & --- \\
 S4 / Mamba~\cite{gu2021s4} & --- (compressed state) & --- & --- & --- \\
+Titans~\cite{behrouz2025titans} & \checkmark & --- & --- & --- \\
+NVSA~\cite{hersche2023nvsa} & --- & --- & \checkmark & --- \\
 Active PC~\cite{rao2023active} & --- & \checkmark & --- & \checkmark \\
 \textbf{PAM (FIND)} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{\checkmark} \\
 \bottomrule
@@ -65,7 +67,7 @@ A key challenge in AI is creating memory systems comparable to the brain. RAG~\c
 
 The core challenge is separating memory storage from computation~\cite{gemici2017generative,gallistel2011memory}. MANNs---NTMs~\cite{graves2014ntm}, DNCs~\cite{graves2016dnc}, Kanerva Machines~\cite{wu2018kanerva}---address this partially. HDC extends sparse distributed memories with symbolic binding~\cite{kanerva2009hyperdimensional,ma2022hyperbox}. Long-context transformers (Infini-Attention~\cite{munkhdalai2024infini}) extend windows but do not solve selective storage. Modern SSMs---Mamba-2~\cite{dao2024mamba2}, xLSTM~\cite{beck2024xlstm}---achieve efficient sequence processing but compress into fixed-size state.
 
-Predictive coding (PC) minimizes prediction errors between expectations and inputs~\cite{millidge2022theoretical,friston2010free}. Extensions to active~\cite{rao2023active} and temporal PC~\cite{millidge2024temporal} enable biologically plausible cognitive maps. Test-time training (TTT)~\cite{sun2024ttt} shares PAM's iterative adaptation principle but modifies the full model rather than memory slots. \textbf{However, current PC models rely on Markov assumptions, unable to handle long-term credit assignment.}
+Predictive coding (PC) minimizes prediction errors between expectations and inputs~\cite{millidge2022theoretical,friston2010free}. Extensions to active~\cite{rao2023active} and temporal PC~\cite{millidge2024temporal} enable biologically plausible cognitive maps. Test-time training (TTT)~\cite{sun2024ttt} shares PAM's iterative adaptation principle but modifies the full model rather than memory slots. Titans~\cite{behrouz2025titans} is closest in spirit: it gates test-time writes to a long-term memory by surprise---sharing PAM's write-gating principle---but stores into a monolithic parametric memory without symbolic binding, compositional retrieval, or action selection. \textbf{However, current PC models rely on Markov assumptions, unable to handle long-term credit assignment.}
 
 \subsubsection*{Causal reasoning, world models, and compositional understanding}
 
@@ -81,9 +83,9 @@ Life-long learning requires managing information without catastrophic forgetting
 
 \subsection{Research strategy and objectives}
 
-\textbf{Central hypothesis:} Predictive coding over content-addressable distributed memory slots is both necessary and sufficient for selective long-horizon recall---the ability to store, retrieve, and compose information across thousands of timesteps without catastrophic forgetting. We decompose this into three testable sub-hypotheses:
+\textbf{Central hypothesis:} Predictive coding over content-addressable distributed memory slots is sufficient for selective long-horizon recall---the ability to store, retrieve, and compose information across thousands of timesteps without catastrophic forgetting---and achieves it where compressed-state methods cannot without unbounded state growth. We decompose this into three testable sub-hypotheses:
 \begin{itemize}[noitemsep,topsep=2pt]
-  \item \textbf{H1 (WP1):} Non-parametric HDC-structured memory achieves zero-forgetting continual learning that no gradient-based method can guarantee---our CORe50 results (100\% recognition, 98.2\% online CL accuracy) confirm this.
+  \item \textbf{H1 (WP1):} Non-parametric HDC-structured memory is immune to parameter-overwriting forgetting \textit{by construction}---a guarantee gradient-based methods do not offer---while maintaining competitive recognition accuracy; our CORe50 results (100\% recognition, 98.2\% online CL accuracy) confirm the accuracy side.
   \item \textbf{H2 (WP2):} Compositional binding in HDC space enables zero-shot generalisation to novel transformation compositions, with distributed memory as a load-bearing component of test-time program synthesis---PAMNCA ablations attribute 30--43\% of performance to memory, growing with compute budget.
   \item \textbf{H3 (WP3):} Memory-augmented agents outperform compressed-state agents (SSMs, Transformers) specifically on tasks requiring recall across $>$5,000 timesteps.
 \end{itemize}
@@ -114,22 +116,20 @@ Life-long learning requires managing information without catastrophic forgetting
 \noindent\textit{Preliminary results.}
 The BioAI group has developed FIND's foundations through neurocomputational memory research: grid/place/border cells emerge spontaneously in AI agents~\cite{schoyen2023coherently}, orthogonal remapping encodes context~\cite{pettersen2024nips,schoyen2025plos,pettersen2024elife}, NCA enables self-organizing module communication~\cite{kvalsund2026sensor}, one-shot memory transfer~\cite{guichard2025engramnca}, and abstract reasoning~\cite{guichard2025arc}. The tPC-KM system achieves 98.1\% exact recall at $\sigma{=}0.4$ ($1.75{\times}$ over feedforward) and $3.75{\times}$ less forgetting than tPC-alone (Figure~\ref{fig:prelim}).
 
-\textbf{WP1: Memory and continual learning.} Beyond the MNIST benchmark, PAM achieves \textbf{100\% recognition accuracy} on CORe50 (50 real-world objects, $T{=}10{,}000$ steps) with both pretrained and raw pixel features. On the official CORe50-NI online continual learning protocol (test-then-train, single pass, no task boundaries), PAM achieves \textbf{98.2\% online accuracy} across 8 experiences (120K samples) in 55 seconds---$12{\times}$ faster than gradient-based replay methods---with zero catastrophic forgetting by construction and positive backward transfer. With PAM's own tPC encoder (zero pretraining), the system reaches \textbf{70.3\% per-experience accuracy} while learning both representations and memory online---the only continual learning system that operates without a pretrained backbone.
+\textbf{WP1: Memory and continual learning.} Beyond the MNIST benchmark, PAM achieves \textbf{100\% recognition accuracy} on CORe50 (50 real-world objects, $T{=}10{,}000$ steps) with both pretrained and raw pixel features. On the official CORe50-NI online continual learning protocol (test-then-train, single pass, no task boundaries), PAM achieves \textbf{98.2\% online accuracy} across 8 experiences (120K samples) in 55 seconds---$12{\times}$ faster than gradient-based replay methods---with positive backward transfer and \textit{zero additional forgetting} as experiences accumulate: non-parametric storage cannot overwrite parameters, so accuracy is bounded only by superposition capacity, which scales predictably with memory dimension~\cite{kanerva2003sparse}. With PAM's own tPC encoder (zero pretraining), the system reaches \textbf{70.3\% per-experience accuracy} while learning both representations and memory online---the only continual learning system that operates without a pretrained backbone. The gap to the frozen-feature setting reflects \textit{representation drift}: online-learned keys diverge from those stored earlier, degrading content-addressable retrieval---the central open problem for episodic memories keyed by learned embeddings, which WP1 addresses with a key-reconsolidation mechanism.
 
-% NOTE: prelim_results.pdf must be regenerated in the experiments repo
-% (make_prelim_fig.py now renders Panel A as a bar chart at sigma=0.4 and fixes
-% the "PM" legend label to "PAM"). Update caption (A) wording when swapped in.
 \begin{wrapfigure}{l}{0.6\textwidth}
   \includegraphics[width=0.99\linewidth,keepaspectratio=true]{figures/prelim_results.pdf}
   \caption{\textbf{Preliminary PAM results (WP1 foundation).}
     (A)~Exact recall vs.\ input noise $\sigma$ ($K{=}100$ items, 20 trials).
     Iterative inference (PAM, tPC-KM) outperforms feedforward encoding (CNN-KM) by $1.75{\times}$ at $\sigma{=}0.4$.
+    Beyond $\sigma{\approx}0.5$ (shaded band), exact recall collapses for all content-addressable methods---a capacity/SNR phase transition predicted by HDC crosstalk analysis, since crosstalk in superposed hypervectors grows with stored items; deriving this boundary analytically is a T1.2 target (Part~II).
     (B)~Exact recall across three sequential class phases ($\sigma{=}0.5$).
     PAM maintains $\approx$78\% recall across all phases; HDC binding prevents inter-class interference as new concepts accumulate, reducing forgetting $3.75{\times}$ versus tPC alone.}\label{fig:prelim}
   \vspace{-3mm}
 \end{wrapfigure}
 
-\textbf{WP2: Compositional reasoning.} We validated PAM's program synthesis capabilities on the Abstraction and Reasoning Corpus (ARC)~\cite{chollet2019arc}. Our PAMNCA system---a neural cellular automaton with distributed PAM memory (1.47M parameters)---achieves \textbf{24.7\% exact match} (321/1302 episodes) through test-time training, approximately $2{\times}$ GPT-4o's 12\% with $>$1000$\times$ fewer parameters. Memory ablations show the distributed memory module contributes 30--43\% of performance, with its contribution \textit{growing} with compute budget. FOMAML meta-learning provides a $2.5{\times}$ effective compute speedup, validating T2.2's meta-learning approach. Separately, our HDC system achieves 100\% on direct analogies (with 200 distractors), 99.5\% on CLUTRR 2-hop relational reasoning, and 100\% on Raven's Progressive Matrices.
+\textbf{WP2: Compositional reasoning.} We validated PAM's program synthesis capabilities on the Abstraction and Reasoning Corpus (ARC)~\cite{chollet2019arc}. Our PAMNCA system---a neural cellular automaton with distributed PAM memory (1.47M parameters)---achieves \textbf{24.7\% exact match} (321/1302 episodes) through test-time training, with no pretrained backbone. The significance is the efficiency frontier, not the absolute score: large program-synthesis ensembles now exceed this number using $10^5$--$10^6\times$ more compute, whereas PAMNCA doubles GPT-4o's 12\% at $>$1000$\times$ fewer parameters, learning each task from its support examples alone. Memory ablations show the distributed memory module contributes 30--43\% of performance, with its contribution \textit{growing} with compute budget. FOMAML meta-learning provides a $2.5{\times}$ effective compute speedup, validating T2.2's meta-learning approach. Separately, our HDC system achieves 100\% on direct analogies (with 200 distractors), 99.5\% on CLUTRR 2-hop relational reasoning, and 100\% on Raven's Progressive Matrices (NVSA~\cite{hersche2023nvsa} reaches similar accuracy on Raven's; PAM's distinction is that the same memory substrate also serves continual temporal recall rather than a dedicated reasoning pipeline).
 
 \begin{figure}[h!]
   \centering
@@ -137,7 +137,7 @@ The BioAI group has developed FIND's foundations through neurocomputational memo
   \caption{\textbf{Headline preliminary results.} PAM against the strongest comparison on each benchmark: noisy sequence recall at $\sigma{=}0.4$ (WP1 foundation), CORe50 re-encounter recognition after $T{=}10{,}000$ steps (WP1), and ARC program synthesis via test-time training (WP2).}\label{fig:headline}
 \end{figure}
 
-PAM makes two testable predictions unique to its architecture: (1)~non-parametric memory achieves \textit{mathematically guaranteed} zero forgetting while maintaining recognition accuracy---our CORe50 experiments confirm 100\% recognition versus the S4D baseline's 44.5\% re-encounter accuracy; (2)~distributed memory is \textit{necessary} for program synthesis via test-time adaptation, with its contribution growing with task complexity---our PAMNCA ablations support this (30\% at TTT=500, 43\% at TTT=1000).
+PAM makes two testable predictions unique to its architecture: (1)~non-parametric memory guarantees zero \textit{additional} forgetting by construction (recall bounded only by superposition capacity) while maintaining recognition accuracy---our CORe50 experiments confirm 100\% recognition versus the S4D baseline's 44.5\% re-encounter accuracy; (2)~distributed memory is load-bearing for program synthesis via test-time adaptation, with its contribution growing with task complexity---our PAMNCA ablations support this (30\% at TTT=500, 43\% at TTT=1000).
 
 \subsection{Major expected outcomes}
 
@@ -147,6 +147,6 @@ PAM makes two testable predictions unique to its architecture: (1)~non-parametri
 
 \noindent\textbf{Society:} Foundations for AI with principled memory applicable to healthcare (patient timelines), industrial automation (Factorio-style planning), and environmental monitoring.
 
-\noindent\textbf{Success criteria:} (i)~$\ge$90\% recall at $\sigma{=}0.3$ and MSE within 10\% of PatchTST (WP1); (ii)~$>$40\% ARC exact match, extending current 24.7\% (WP2); (iii)~$>$10\,pp over DQN on Memory Maze at $T{>}5{,}000$ (WP3). Team: PI (50\%), one postdoc (ML systems), two PhDs; 4-tier benchmark hierarchy (Part~II).
+\noindent\textbf{Success criteria:} (i)~$\ge$90\% recall at $\sigma{=}0.3$ and MSE within 10\% of PatchTST (WP1); (ii)~$>$40\% ARC exact match at $<$10M parameters without a pretrained backbone, extending current 24.7\% (WP2); (iii)~$>$10\,pp over DQN on Memory Maze at $T{>}5{,}000$ (WP3). Team: PI (50\%), one postdoc (ML systems), two PhDs; 4-tier benchmark hierarchy (Part~II).
 
 \printbibliography[title={References}]

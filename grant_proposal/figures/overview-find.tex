@@ -21,7 +21,7 @@
     wpbox/.style={draw, rounded corners=6pt, minimum height=2.0cm, minimum width=3.8cm,
                   font=\small\sffamily, thick, fill=#1!8, draw=#1!50},
     resultbox/.style={draw, rounded corners=3pt, minimum height=0.4cm,
-                      font=\tiny\sffamily\bfseries, fill=#1!20, draw=#1!50, text=#1!80},
+                      font=\scriptsize\sffamily\bfseries, fill=#1!20, draw=#1!50, text=#1!80},
     mechbox/.style={draw, rounded corners=3pt, minimum height=0.5cm, minimum width=2.8cm,
                     font=\scriptsize\sffamily, fill=#1!12, draw=#1!40},
     arr/.style={->, thick, color=arrowgray},
@@ -91,9 +91,9 @@
 \draw[arr, wp2col!70, line width=1.2pt] (pam.east) -- node[above, label] {Extension} (wp2.west);
 \draw[arr, wp3col!70, line width=1.2pt] (pam.south) -- node[right, label, xshift=2pt] {Stress test} (wp3.north);
 
-% Feedback arrows
-\draw[darr=wp1col, <-] (pam.170) -- ++(-0.8,0) |- node[below, label, xshift=8pt] {Design rules} (wp1.east |- wp1.south east);
-\draw[darr=wp2col, <-] (pam.10) -- ++(0.8,0) |- node[below, label, xshift=-8pt] {Compositions} (wp2.west |- wp2.south west);
+% Feedback arrows (labels on-path, white-filled so they anchor to their arrow)
+\draw[darr=wp1col, <-] (pam.170) -- ++(-0.8,0) |- node[pos=0.75, label, fill=white, inner sep=1.5pt] {Design rules} (wp1.east |- wp1.south east);
+\draw[darr=wp2col, <-] (pam.10) -- ++(0.8,0) |- node[pos=0.75, label, fill=white, inner sep=1.5pt] {Compositions} (wp2.west |- wp2.south west);
 
 % ============ TOP: THREE PRINCIPLES ============
 \node[draw, rounded corners=4pt, fill=errcol!8, draw=errcol!30, minimum height=0.5cm, minimum width=2.4cm,

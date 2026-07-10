@@ -9,6 +9,7 @@ Saved to grant_proposal/figures/prelim_results.pdf
 """
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -18,8 +19,11 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import numpy as np
 
-ROOT = Path(__file__).parent.parent.parent
+# Results live in the experiments repo; override when running from elsewhere:
+#   FIND_RESULTS_ROOT=~/Github/FIND python make_prelim_fig.py
+ROOT = Path(os.environ.get("FIND_RESULTS_ROOT", Path(__file__).parent.parent.parent)).expanduser()
 sys.path.insert(0, str(ROOT))
+OUT_DIR = Path(__file__).parent
 
 # ── Load data ─────────────────────────────────────────────────────────────────
 
@@ -88,34 +92,36 @@ def style_ax(ax):
 fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=(7.2, 2.9), sharey=True)
 fig.subplots_adjust(wspace=0.08)
 
-# ─── Panel A: recall at σ=0.4, K=100 (bar chart) ─────────────────────────────
-# The full noise sweep is uninformative in print (all methods saturate below
-# σ=0.2 and collapse above σ=0.6); the discriminating point is σ=0.4.
-# TODO: consider a third panel with the CORe50-NI online-accuracy curve once
-# those results are exported to results/ — a stronger headline than MNIST.
+# ─── Panel A: recall vs σ at K=100 ───────────────────────────────────────────
+# The σ≥0.6 collapse is shared by all content-addressable methods — a
+# capacity/SNR phase transition from HDC crosstalk. Frame it with a shaded
+# operating-regime band rather than hiding it.
 
-SIGMA_STAR = 0.4
-bar_keys = [k for k in MODEL_ORDER
-            if k in noise_data and K_FIXED in noise_data[k]
-            and SIGMA_STAR in noise_data[k][K_FIXED]]
-bar_vals = [noise_data[k][K_FIXED][SIGMA_STAR].get("exact_recall", np.nan) for k in bar_keys]
-bar_stds = [noise_data[k][K_FIXED][SIGMA_STAR].get("exact_recall_std", 0.0) for k in bar_keys]
+REGIME_MAX = 0.5
+ax_a.axvspan(0.0, REGIME_MAX, color="#2D6A4F", alpha=0.06, zorder=0)
+ax_a.axvline(REGIME_MAX, color="#2D6A4F", alpha=0.35, lw=0.8, ls="--", zorder=0)
+ax_a.text(REGIME_MAX / 2, 0.06, "operating regime", ha="center", fontsize=7,
+          color="#2D6A4F", alpha=0.85, style="italic")
 
-xs = np.arange(len(bar_keys))
-ax_a.bar(xs, bar_vals, yerr=bar_stds, width=0.62, capsize=3,
-         color=[COLORS[k] for k in bar_keys],
-         error_kw=dict(lw=0.8, ecolor="black", alpha=0.6))
-for x, v in zip(xs, bar_vals):
-    ax_a.annotate(f"{v:.0%}", (x, v), textcoords="offset points",
-                  xytext=(0, 6), ha="center", fontsize=7)
+for key in MODEL_ORDER:
+    if key not in noise_data or K_FIXED not in noise_data[key]:
+        continue
+    vals = [noise_data[key][K_FIXED].get(s, {}).get("exact_recall", np.nan) for s in noise_vals]
+    stds = [noise_data[key][K_FIXED].get(s, {}).get("exact_recall_std", 0.0)  for s in noise_vals]
+    ls, mk, lw = LINES[key]
+    ax_a.plot(noise_vals, vals, ls, marker=mk, lw=lw, ms=5,
+              color=COLORS[key], label=LABELS[key])
+    if key == "full":
+        lo = [v - s for v, s in zip(vals, stds)]
+        hi = [v + s for v, s in zip(vals, stds)]
+        ax_a.fill_between(noise_vals, lo, hi, color=COLORS[key], alpha=0.13)
 
 style_ax(ax_a)
-ax_a.set_ylim(0, 1.14)
-ax_a.set_xticks(xs)
-ax_a.set_xticklabels([LABELS[k] for k in bar_keys], rotation=20, ha="right", fontsize=7)
+ax_a.set_xlabel("Input noise  σ", fontsize=9)
 ax_a.set_ylabel("Exact recall", fontsize=9)
-ax_a.set_title(f"(A)  Exact recall at σ = {SIGMA_STAR}  (K = {K_FIXED})",
-               fontsize=9, fontweight="bold")
+ax_a.set_title(f"(A)  Noise robustness  (K = {K_FIXED})", fontsize=9, fontweight="bold")
+ax_a.set_xlim(-0.02, max(noise_vals) + 0.02)
+ax_a.legend(fontsize=7, loc="center left", frameon=False)
 
 # ─── Panel B: recall across class phases (triple_stress) ─────────────────────
 
@@ -140,7 +146,7 @@ ax_b.legend(fontsize=7, loc="lower left", frameon=False)
 
 # ── Save ─────────────────────────────────────────────────────────────────────
 
-out = ROOT / "grant_proposal" / "figures" / "prelim_results.pdf"
+out = OUT_DIR / "prelim_results.pdf"
 fig.savefig(out, bbox_inches="tight", dpi=200)
 plt.close(fig)
 print(f"Saved → {out}")

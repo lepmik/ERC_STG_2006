@@ -52,7 +52,7 @@
 \node[tierhead=t2col, anchor=south west] at (t2.north west) [yshift=2pt] {Tier 2};
 
 % ============ TIER 3 ============
-\node[tierbox=t3col, right=0.6cm of t2] (t3) {
+\node[tierbox=t3col, right=1.2cm of t2] (t3) {
   \textcolor{t3col!80}{\textbf{Tier 3: Core Thesis}}\\[3pt]
   sMNIST ($T{=}784$)\\
   Path-X ($T{=}16{,}384$) --- gold standard\\
@@ -64,8 +64,8 @@
 \node[wpbadge=wpred, anchor=north east] at (t3.north east) {WP1--2};
 \node[tierhead=t3col, anchor=south west] at (t3.north west) [yshift=2pt] {Tier 3};
 
-% ============ TIER 4 ============
-\node[tierbox=t4col, right=0.6cm of t3] (t4) {
+% ============ TIER 4 (parallel consolidation track) ============
+\node[tierbox=t4col, right=0.8cm of t3, yshift=0.4cm] (t4) {
   \textcolor{t4col!80}{\textbf{Tier 4: Continual Learning}}\\[3pt]
   Split MNIST / CIFAR (5 tasks)\\
   Concept drift benchmarks\\
@@ -76,23 +76,32 @@
 \node[wpbadge=wpblue, anchor=north east] at (t4.north east) {WP1};
 \node[tierhead=t4col, anchor=south west] at (t4.north west) [yshift=2pt] {Tier 4};
 
-% ============ PROGRESSION ARROWS ============
+% ============ PROGRESSION ARROWS + DECISION GATE ============
 \draw[arr] (t1) -- (t2);
-\draw[arr] (t2) -- (t3);
-\draw[arr] (t3) -- (t4);
+
+% gate diamond ON the Tier 2 -> Tier 3 arrow
+\node[diamond, draw=arrcol, fill=white, very thick, inner sep=2pt, aspect=1.3]
+  (gate) at ($(t2.east)!0.5!(t3.west)$) {};
+\draw[arr] (t2) -- (gate);
+\draw[arr] (gate) -- (t3);
+
+\node[font=\scriptsize\sffamily\itshape, color=arrcol, text width=4.8cm, align=center]
+  (gatetext) at ($(gate)+(0,2.2)$) {
+  \textbf{Decision gate:} if PAM does not surpass Tier~2,\\Tier~3 targets are adjusted before investing in WP3
+};
+\draw[dashed, thin, arrcol!60] (gatetext.south) -- (gate.north);
+
+% Tier 4 runs alongside Tiers 2--3, not after them
+\draw[arr, dashed] (t3) -- (t4);
+\node[font=\tiny\sffamily\itshape, color=t4col!70, anchor=north] at (t4.south) [yshift=-2pt]
+  {parallel track: consolidation, evaluated throughout Tiers 2--3};
 
 % ============ BOTTOM: Progression label ============
 \draw[decorate, decoration={brace, amplitude=6pt, mirror, raise=6pt}, thick, color=arrcol]
-  (t1.south west) -- (t4.south east)
+  (t1.south west) -- (t4.south east |- t1.south)
   node[midway, below=14pt, font=\small\sffamily, color=arrcol] {
-    Increasing sequence length, task complexity, and ecological validity $\longrightarrow$
+    Increasing task complexity and ecological validity $\longrightarrow$
   };
-
-% ============ TOP: Decision gate ============
-\node[above=0.8cm of $(t2.north)!0.5!(t3.north)$, font=\scriptsize\sffamily\itshape, color=arrcol,
-      text width=6cm, align=center] {
-  \textbf{Decision gate:} if PAM does not surpass Tier~2,\\Tier~3 targets are adjusted before investing in WP3
-};
 
 \end{tikzpicture}
 \end{document}
