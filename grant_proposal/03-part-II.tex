@@ -19,7 +19,7 @@ This section details the research methodology, work plan, and risk assessment fo
 
 \subsection{Research methodology}
 
-One prediction-error objective governs PAM's three operations on a shared memory---encode, retrieve, and act---made concrete by the update equations below. Each module $m$ has latent state $z^m_t \in \mathbb{R}^{d_z}$ and sensory input $x^m_t \in \mathbb{R}^{d_x}$ at time $t$. The prediction error $e_t = x^m_t - \hat{x}^m_t$ drives module state updates: $z^m_{t+1} = f_m(z^m_t, c^m_t, r^m_t, a_t)$, where $f_m$ is a learnable function, $a_t$ is the action, $r^m_c = \sum_i \alpha^m_c[i]h^m_i$ is context-dependent memory retrieval, and $c^m_t$ is contextual input from inter-module communication. Gradients flow end-to-end through Gumbel-softmax routing and soft attention over memory slots on the read path; discrete WTA writes are handled with straight-through estimators (soft-read/hard-write), so encoder and modules train jointly while writes remain discrete. Two primary orchestration mechanisms will be explored:
+One prediction-error objective governs PAM's three operations on a shared memory---encode, retrieve, and act---made concrete by the update equations below. Each module $m$ has latent state $z^m_t \in \mathbb{R}^{d_z}$ and sensory input $x^m_t \in \mathbb{R}^{d_x}$ at time $t$. The prediction error $e_t = x^m_t - \hat{x}^m_t$ drives module state updates: $z^m_{t+1} = f_m(z^m_t, c^m_t, r^m_t, a_t)$, where $f_m$ is a learnable function, $a_t$ is the action, $r^m_c = \sum_i \alpha^m_c[i]h^m_i$ is context-dependent memory retrieval, and $c^m_t$ is contextual input from inter-module communication. Gradients flow end-to-end through Gumbel-softmax routing and soft attention over memory slots on the read path; discrete WTA writes are handled with straight-through estimators (soft-read/hard-write), so encoder and modules train jointly while writes remain discrete. Beyond these per-module operations, modules must exchange information; two orchestration mechanisms will be explored:
 \begin{enumerate}[noitemsep,topsep=2pt]
   \item \textbf{\textit{Message passing:}} attention and convolution combined with aggregation---demonstrated in active vision~\cite{kvalsund2026sensor}
   \item \textbf{\textit{Neural cellular automata (NCA):}} self-organizing principles for module communication---demonstrated in one-shot memory transfer~\cite{guichard2025engramnca} and abstract reasoning~\cite{guichard2025arc}
@@ -28,7 +28,7 @@ One prediction-error objective governs PAM's three operations on a shared memory
 
 \subsubsection*{WP1: Temporal Predictive Coding with Distributed Memory \textnormal{(Lepperød, PhD1; RQ1; Years 1--3)}}
 
-WP1 establishes the core PAM architecture for temporal prediction and memory. Building on our preliminary results ($98.1\%$ exact recall at $\sigma{=}0.4$, $3.75{\times}$ less forgetting than tPC-alone), WP1 extends the architecture to challenging temporal benchmarks and characterizes its operational regime.
+WP1 establishes the encode and retrieve routes---temporal prediction into memory and content-addressable recall out of it. Building on our preliminary results ($98.1\%$ exact recall at $\sigma{=}0.4$, $3.75{\times}$ less forgetting than tPC-alone), WP1 extends the architecture to challenging temporal benchmarks and characterizes its operational regime.
 
 \noindent\textbf{Benchmark strategy.} We adopt a four-tier evaluation hierarchy (Figure~\ref{fig:tiers}) designed to systematically validate PAM's capabilities and position it against the state of the art:
 \begin{itemize}[noitemsep,topsep=2pt]
@@ -58,7 +58,7 @@ Extend PAM with hierarchical time-scale factorisation: fast modules ($\Delta t{=
 
 \subsubsection*{WP2: Causal Reasoning and Compositional Understanding \textnormal{(Lepperød, PD; RQ2--RQ4; Years 2--4)}}
 
-WP2 extends PAM with active inference, causal world model learning, and subspace-based compositional reasoning. This WP integrates neurosymbolic components for explicit reasoning alongside statistical learning, while enabling the system to discover causal structure through interventions.
+WP2 builds out the two routes WP1 leaves unexercised: \textit{compositional retrieval}---subspace reasoning over the HDC memory---and \textit{action}, where active inference turns the same prediction-error objective into causal world-model learning. Neurosymbolic components provide explicit reasoning alongside statistical learning, and the agent discovers causal structure through interventions.
 
 \paragraph{T2.1: Action-Augmented Temporal Predictive Coding}
 T2.1 implements the \textit{act} route: action becomes a second way to minimise prediction error, complementing perceptual inference. We extend PAM with action nodes whose selection is scored by how well the resulting input is predicted to match memory---the agent acts to fulfil memory-derived predictions. Concretely, we develop action-conditioned memory addressing, action-dependent update rules across multiple timescales, and joint optimisation of state predictions and action selection while maintaining temporal consistency.
@@ -84,7 +84,7 @@ Execute comprehensive ablation studies to quantify the contribution of each orch
 
 \subsubsection*{WP3: Long-Horizon Adaptation in Open-Ended Environments \textnormal{(Lepperød, PhD2; RQ4--RQ5; Years 3--5)}}
 
-WP3 stress-tests PAM in environments demanding sophisticated planning, resource management, and adaptation to ever-changing dynamics. We adopt a tiered ambition structure:
+WP3 brings all three routes together---encode, retrieve, act---in a closed perception--action loop, stress-testing PAM in environments demanding sophisticated planning, resource management, and adaptation. We adopt a tiered ambition structure:
 \begin{itemize}[noitemsep,topsep=2pt]
   \item \textbf{Must achieve:} Memory Maze at $T{=}10{,}000$ with clear improvement ($>$10\,pp) over LSTM/DQN baselines.
   \item \textbf{Should achieve:} Simplified Minecraft tasks (navigation, basic crafting) via Python Malmo API~\cite{johnson2016malmo}.
