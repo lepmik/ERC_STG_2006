@@ -19,7 +19,7 @@ This section details the research methodology, work plan, and risk assessment fo
 
 \subsection{Research methodology}
 
-The core update equations underpin PAM's mechanisms. Each module $m$ has latent state $z^m_t \in \mathbb{R}^{d_z}$ and sensory input $x^m_t \in \mathbb{R}^{d_x}$ at time $t$. The prediction error $e_t = x^m_t - \hat{x}^m_t$ drives module state updates: $z^m_{t+1} = f_m(z^m_t, c^m_t, r^m_t, a_t)$, where $f_m$ is a learnable function, $a_t$ is the action, $r^m_c = \sum_i \alpha^m_c[i]h^m_i$ is context-dependent memory retrieval, and $c^m_t$ is contextual input from inter-module communication. Gradients flow end-to-end through Gumbel-softmax routing and soft attention over memory slots on the read path; discrete WTA writes are handled with straight-through estimators (soft-read/hard-write), so encoder and modules train jointly while writes remain discrete. Two primary orchestration mechanisms will be explored:
+One prediction-error objective governs PAM's three operations on a shared memory---encode, retrieve, and act---made concrete by the update equations below. Each module $m$ has latent state $z^m_t \in \mathbb{R}^{d_z}$ and sensory input $x^m_t \in \mathbb{R}^{d_x}$ at time $t$. The prediction error $e_t = x^m_t - \hat{x}^m_t$ drives module state updates: $z^m_{t+1} = f_m(z^m_t, c^m_t, r^m_t, a_t)$, where $f_m$ is a learnable function, $a_t$ is the action, $r^m_c = \sum_i \alpha^m_c[i]h^m_i$ is context-dependent memory retrieval, and $c^m_t$ is contextual input from inter-module communication. Gradients flow end-to-end through Gumbel-softmax routing and soft attention over memory slots on the read path; discrete WTA writes are handled with straight-through estimators (soft-read/hard-write), so encoder and modules train jointly while writes remain discrete. Two primary orchestration mechanisms will be explored:
 \begin{enumerate}[noitemsep,topsep=2pt]
   \item \textbf{\textit{Message passing:}} attention and convolution combined with aggregation---demonstrated in active vision~\cite{kvalsund2026sensor}
   \item \textbf{\textit{Neural cellular automata (NCA):}} self-organizing principles for module communication---demonstrated in one-shot memory transfer~\cite{guichard2025engramnca} and abstract reasoning~\cite{guichard2025arc}
@@ -45,7 +45,7 @@ WP1 establishes the core PAM architecture for temporal prediction and memory. Bu
 \end{figure}
 
 \paragraph{T1.1: Temporal Benchmarks and Architecture Scaling}
-\textbf{Completed:} MNIST digit recall benchmark~\cite{gemici2017generative} (see Part I, Fig.~3).
+\textbf{Completed:} MNIST digit recall benchmark~\cite{gemici2017generative} (see Part~I, Fig.~\ref{fig:prelim}).
 \textbf{Planned:} Validate on Tier~1 (Copy Task, Adding Problem) and Tier~2 (ETT, Weather, ECL) benchmarks. Visual encoding via ResNet~\cite{he2016resnet}. Compare against GTMs~\cite{gemici2017generative}, VRNNs~\cite{chung2015vrnn}, LSTMs~\cite{hochreiter1997lstm}, S4~\cite{gu2021s4}, NTMs~\cite{graves2014ntm}, and DNCs~\cite{graves2016dnc}. Offline probing~\cite{park2023probing} will analyze learned representations.
 \textit{Success criterion:} PAM must achieve ${\ge}90\%$ exact recall at $\sigma{=}0.3$ on Tier~1 tasks and MSE within 10\% of PatchTST on Tier~2.
 
@@ -61,7 +61,7 @@ Extend PAM with hierarchical time-scale factorisation: fast modules ($\Delta t{=
 WP2 extends PAM with active inference, causal world model learning, and subspace-based compositional reasoning. This WP integrates neurosymbolic components for explicit reasoning alongside statistical learning, while enabling the system to discover causal structure through interventions.
 
 \paragraph{T2.1: Action-Augmented Temporal Predictive Coding}
-Extend PAM to incorporate action nodes that modulate state transitions. Develop action-dependent prediction error computation across multiple timescales, including action-conditioned memory addressing, action-dependent update rules, and methods for maintaining temporal consistency. Design joint optimization of state predictions and action selections.
+T2.1 implements the \textit{act} route: action becomes a second way to minimise prediction error, complementing perceptual inference. We extend PAM with action nodes whose selection is scored by how well the resulting input is predicted to match memory---the agent acts to fulfil memory-derived predictions. Concretely, we develop action-conditioned memory addressing, action-dependent update rules across multiple timescales, and joint optimisation of state predictions and action selection while maintaining temporal consistency.
 \textit{Success criterion:} Action-conditioned prediction error must correlate $r{>}0.7$ with observed state transitions in a controlled navigation task.
 
 \paragraph{T2.2: Subspace Reasoning and Compositional Understanding}

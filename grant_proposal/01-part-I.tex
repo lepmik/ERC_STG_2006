@@ -21,22 +21,22 @@ Consider an agent managing a Factorio production chain (Figure~\ref{fig:factorio
 
 \subsection{Ground-breaking nature and impact}
 
-FIND rests on a single bet: that predictive coding over distributed, content-addressable memory---the brain's mechanism for selective long-horizon recall---is the substrate flexible AI is missing. We develop \textbf{PAM} (\textbf{P}redictive \textbf{A}ctive temporal coding with distributed \textbf{M}emory), a flat modular architecture where complexity arises from learned routing and memory interactions, operating through:
+FIND rests on a single bet: that predictive coding over distributed, content-addressable memory---the brain's mechanism for selective long-horizon recall---is the substrate flexible AI is missing. We develop \textbf{PAM} (\textbf{P}redictive \textbf{A}ctive temporal coding with distributed \textbf{M}emory), a flat modular architecture built on one principle: \textbf{minimising prediction error over a shared memory}. That memory is a content-addressable distributed store~\cite{wu2018kanerva,kanerva2003sparse} whose contents are hyperdimensional vectors~\cite{kanerva2009hyperdimensional}, so recall and symbolic composition (binding, superposition) share one space. Every other mechanism is a way of touching that memory:
 \begin{itemize}[noitemsep,topsep=2pt]
-  \item Specialized modules with dedicated Kanerva memory~\cite{wu2018kanerva,kanerva2003sparse}
-  \item HDC symbolic representations~\cite{kanerva2009hyperdimensional} retained in memory
-  \item Learned orchestration for dynamic information routing
-  \item Temporal predictions via predictive coding; action selection via active inference~\cite{friston2010free,rao2023active}
+  \item \textbf{Encode:} temporal predictive coding denoises each observation into a clean latent before it is stored, so memory holds high-SNR content rather than raw input.
+  \item \textbf{Retrieve:} content-addressable read by similarity, with HDC binding making retrieval compositional and symbolic.
+  \item \textbf{Act:} active inference selects actions that bring incoming input into line with what memory predicts~\cite{friston2010free,rao2023active}, closing the perception--action loop on the same objective while gathering experience that updates memory.
 \end{itemize}
+\noindent Learned routing orchestrates which modules read and write when. The name states the design: \textbf{P}redictive coding encodes, distributed \textbf{M}emory retrieves, \textbf{A}ctive inference acts.
 
-\noindent\textbf{FIND's novelty} lies at the intersection of three established fields in a configuration no prior system has achieved simultaneously:
+\noindent\textbf{FIND's novelty} is this unification: it sits at the intersection of three established fields in a configuration no prior system has achieved simultaneously:
 \begin{itemize}[noitemsep,topsep=2pt]
   \item \textbf{Temporal predictive coding}~\cite{millidge2024temporal} with \textbf{distributed external memory}---not just recurrent state: prior tPC models store context solely in hidden activations; FIND externalises memory into content-addressable HDC slots persistent across thousands of timesteps.
   \item \textbf{Memory-augmented networks}~\cite{graves2016dnc} with \textbf{biologically-grounded iterative inference}---not single-pass read/write: prior MANNs use a single forward pass to address memory; FIND uses iterative predictive-coding inference to resolve ambiguous queries, yielding a $1.75{\times}$ recall advantage at $\sigma{=}0.4$.
   \item \textbf{Hyperdimensional computing}~\cite{kanerva2009hyperdimensional} \textbf{embedded as the storage format of a gradient-trained system}---not as a standalone symbolic method: prior HDC systems operate outside neural training loops, and even NVSA~\cite{hersche2023nvsa}, which couples vector-symbolic reasoning to a trained perception network, is a single-task inference pipeline without persistent temporal memory, continual learning, or action; FIND makes HDC the storage substrate of a continual, temporal system, integrating binding directly into the memory update.
 \end{itemize}
 
-\noindent Table~\ref{tab:positioning} situates FIND against the state of the art. No existing system combines all four capabilities.
+\noindent Table~\ref{tab:positioning} situates FIND against the state of the art: no existing system unites these capabilities in one end-to-end trainable architecture.
 
 \begin{table}[h!]
 \centering\footnotesize
@@ -79,7 +79,7 @@ Cognitive map learning has been pursued in neuroscience~\cite{hafting2005grid} a
 
 \subsubsection*{Adaptive learning}
 
-Life-long learning requires managing information without catastrophic forgetting. Current approaches span regularization, replay, and Bayesian methods~\cite{wang2024comprehensive,nguyen2017vcl}; we have explored generative stability~\cite{wasiluk2023genreplay} and plasticity~\cite{wasiluk2025plasticity}. FIND addresses this through HDC~\cite{kanerva2009hyperdimensional}: binding memories as compositional vectors enables fast retrieval and symbolic queries without retraining.
+Life-long learning requires managing information without catastrophic forgetting. Current approaches span regularization, replay, and Bayesian methods~\cite{wang2024comprehensive,nguyen2017vcl}; we have explored generative stability~\cite{wasiluk2023genreplay}. FIND addresses this through HDC~\cite{kanerva2009hyperdimensional}: binding memories as compositional vectors enables fast retrieval and symbolic queries without retraining.
 
 \subsection{Research strategy and objectives}
 
@@ -90,7 +90,7 @@ Life-long learning requires managing information without catastrophic forgetting
   \item \textbf{H3 (WP3):} Memory-augmented agents outperform compressed-state agents (SSMs, Transformers) specifically on tasks requiring recall across $>$5,000 timesteps.
 \end{itemize}
 
-\noindent We address this through three objectives and corresponding work packages:
+\noindent H1--H3 concern the memory itself (encode, retrieve); the third operation, \textit{act} (active inference), extends the same objective to action and is a design principle developed in WP2--3, not a Part~I claim. We address these through three objectives and corresponding work packages:
 
 \begin{itemize}[noitemsep,topsep=2pt]
   \item \textbf{Objective 1 / WP1: Temporal Predictive Coding with Distributed Memory.} Develop the foundational PAM architecture that processes information over different time scales through temporal predictive coding with distributed memory modules.
@@ -98,14 +98,14 @@ Life-long learning requires managing information without catastrophic forgetting
   \item \textbf{Objective 3 / WP3: Long-Horizon Adaptation in Open-Ended Environments.} Stress-test the complete PAM system across a graduated suite of environments---Memory Maze, then Minecraft, with Factorio as the aspirational capstone---that require sophisticated planning, resource management, and long-horizon adaptation.
 \end{itemize}
 
-\noindent\textbf{Theoretical approach.} PAM combines three mechanisms:
+\noindent\textbf{Theoretical approach.} A shared content-addressable memory (Kanerva store~\cite{wu2018kanerva}, HDC format) sits at PAM's centre; three processes read and write it under one prediction-error objective:
 \begin{enumerate}[noitemsep,topsep=2pt]
-  \item \textit{Distributed modular specialization:} Specialized modules with dedicated Kanerva memory~\cite{wu2018kanerva}, routed via Gumbel-softmax program induction iteratively over $n$ stages.
-  \item \textit{Temporal predictive coding:} Prediction errors drive memory updates and model learning.
-  \item \textit{Active inference:} Action selection minimizes uncertainty, enabling efficient exploration and causally relevant memory storage.
+  \item \textit{Encode:} temporal predictive coding iteratively refines each latent, so the denoised estimate---not the raw input---is what is written.
+  \item \textit{Retrieve \& compose:} modules read by content similarity, with HDC binding making retrieval compositional; module specialization is set by Gumbel-softmax routing applied iteratively over $n$ stages.
+  \item \textit{Act:} active inference selects actions that drive inputs toward memory-derived predictions---reducing uncertainty (exploration) and storing causally relevant experience.
 \end{enumerate}
 
-\noindent PAM uses content-addressable memory with retrieval via similarity between $z^m_t$ and stored basis vectors $h^m_i$, with exponential maps~\cite{pettersen2025exponential} for closed-form Riemannian updates. HDC~\cite{kanerva2009hyperdimensional,pettersen2025exponential} bridges neural and symbolic approaches, enabling compositional reasoning through binding operations (Figure~\ref{fig:arch}).
+\noindent Retrieval uses similarity between $z^m_t$ and stored basis vectors $h^m_i$, with exponential maps~\cite{pettersen2025exponential} giving closed-form Riemannian updates on the memory manifold (Figure~\ref{fig:arch}).
 
 \begin{figure}[ht]
   \centering
@@ -137,11 +137,11 @@ The BioAI group has developed FIND's foundations through neurocomputational memo
   \caption{\textbf{Headline preliminary results.} PAM against the strongest comparison on each benchmark: noisy sequence recall at $\sigma{=}0.4$ (WP1 foundation), CORe50 re-encounter recognition after $T{=}10{,}000$ steps (WP1), and ARC program synthesis via test-time training (WP2).}\label{fig:headline}
 \end{figure}
 
-PAM makes two testable predictions unique to its architecture: (1)~non-parametric memory guarantees zero \textit{additional} forgetting by construction (recall bounded only by superposition capacity) while maintaining recognition accuracy---our CORe50 experiments confirm 100\% recognition versus the S4D baseline's 44.5\% re-encounter accuracy; (2)~distributed memory is load-bearing for program synthesis via test-time adaptation, with its contribution growing with task complexity---our PAMNCA ablations support this (30\% at TTT=500, 43\% at TTT=1000).
+Two of these sub-hypotheses already have preliminary support: (1)~non-parametric memory guarantees zero \textit{additional} forgetting by construction (recall bounded only by superposition capacity) while maintaining recognition accuracy---our CORe50 experiments confirm 100\% recognition versus the S4D baseline's 44.5\% re-encounter accuracy; (2)~distributed memory is load-bearing for program synthesis via test-time adaptation, with its contribution growing with task complexity---our PAMNCA ablations support this (30\% at TTT=500, 43\% at TTT=1000).
 
 \subsection{Major expected outcomes}
 
-\noindent\textbf{Science:} A theoretical framework unifying predictive coding, distributed memory, and active inference beyond Markov assumptions. Understanding of how modular specialization emerges from predictive principles.
+\noindent\textbf{Science:} A theoretical framework in which perception, memory, and action reduce to one prediction-error objective, extending predictive coding beyond its Markovian limits. Understanding of how modular specialization emerges from predictive principles.
 
 \noindent\textbf{Technology:} PAM as open-source framework with benchmarks spanning forecasting (ETT, Weather), long-range memory (Path-X, Memory Maze), and continual learning. Orchestration algorithms with reproducible evaluation suites.
 

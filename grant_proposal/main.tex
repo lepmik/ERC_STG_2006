@@ -105,8 +105,8 @@
 
 % save bibliography space....
 \usepackage{lmodern}
-\usepackage[giveninits=true,backend=biber,doi=true,isbn=true,url=false,maxnames=1,sorting=none,refsection=part]{biblatex}
-\renewcommand{\bibfont}{\normalfont\footnotesize}
+\usepackage[giveninits=true,backend=biber,doi=false,isbn=false,url=false,maxnames=5,sorting=none,style=numeric-comp]{biblatex}
+\renewcommand{\bibfont}{\normalfont\normalsize}
 \addbibresource{references.bib}
 % Strip arXiv pseudo-DOIs (10.48550/*) so only eprint: is shown for preprints
 \DeclareSourcemap{
@@ -117,32 +117,9 @@
     }
   }
 }
-\defbibenvironment{bibliography}
-  {\noindent}
-  {\unspace}
-  {\printtext[bold]{%
-     \printtext[labelnumberwidth]{%
-       \printfield{labelprefix}%
-       \printfield{labelnumber}}}%
-   \addspace}
-\renewbibmacro*{finentry}{\finentry\quad}
-\renewbibmacro{in:}{}
+% Strip arXiv dblp field
 \AtEveryBibitem{%
-  \clearfield{pages}%
-  \clearfield{title}%
-  \clearfield{journaltitle}%
-  \clearfield{booktitle}%
-  \clearfield{series}%
-  \clearfield{volume}%
-  \clearfield{number}%
-  \clearfield{edition}%
-  \clearfield{note}%
-  \clearlist{publisher}%
-  \clearlist{location}%
-  \clearlist{organization}%
-  \clearname{editor}%
   \clearfield{dblp}%
-  \clearfield{month}%
 }
 
 \title{\vspace{-10mm}\Large{\project: Flexible Intelligence through Neurocomputational Design}}
@@ -184,6 +161,11 @@
 % ============================================================
 \newpage
 \switchtobtwo
+% Part II is submitted as a separate PDF (B2); restart figure/table numbering
+% so the split B2 is self-contained. Cross-refs to Part I resolve via \ref
+% (label numbers are captured at figure creation, before this reset).
+\setcounter{figure}{0}
+\setcounter{table}{0}
 \begin{refsection}
 
 {\setstretch{1.0}
