@@ -16,6 +16,7 @@
 \textbf{Host Institution:} & Simula Research Laboratory, Norway \\[2pt]
 \textbf{Duration:} & 60 months \\[2pt]
 \textbf{Primary Panel:} & PE6 — Computer Science and Informatics \\[2pt]
+\textbf{Secondary Panel:} & LS5 — Neuroscience and Disorders of the Nervous System \\[2pt]
 \end{tabular}
 \end{center}
 \vspace{6mm}
@@ -27,5 +28,8 @@
 PAM combines three mechanisms: (1)~\textit{Distributed modular specialization} where each module maintains dedicated content-addressable memory; (2)~\textit{Temporal predictive coding} where prediction errors drive memory updates and learning; and (3)~\textit{Active inference} where action selection minimizes uncertainty. Our preliminary results demonstrate PAM's viability beyond toy benchmarks: 100\% recognition accuracy on CORe50 (50 objects) with \textbf{zero additional forgetting by construction}---non-parametric storage cannot overwrite parameters; \textbf{98.2\% online continual learning accuracy} across 120K samples in 55 seconds---12$\times$ faster than gradient-based methods; and \textbf{24.7\% exact match on ARC} (the Abstraction and Reasoning Corpus) with only 1.47M parameters and no pretraining, approximately 2$\times$ GPT-4o's 12\% at $>$1000$\times$ fewer parameters.
 
 FIND will develop PAM through three work packages: \textbf{WP1} establishes temporal predictive coding with distributed memory for continual learning and long-range temporal reasoning; \textbf{WP2} extends this to compositional reasoning and program synthesis through neurosymbolic HDC integration; and \textbf{WP3} stress-tests the system in demanding open-ended environments (Memory Maze, Minecraft, Factorio) requiring planning and adaptation across $>$10,000 timesteps.
+
+\vspace{3mm}
+\noindent\textbf{Cross-panel review.} \project\ sits at the interface of computer science and systems neuroscience and requires review by more than one ERC panel. As an engineering contribution, PAM advances machine learning---distributed memory, continual learning, and compositional reasoning across long horizons---and must be assessed by a \textbf{Computer Science and Informatics} panel (PE6) for its algorithmic novelty and empirical performance. As a neurocomputational theory, PAM is built on temporal predictive coding, hippocampal content-addressable memory, and active inference, and yields falsifiable predictions tested against neural representations of space and memory---demanding a \textbf{Neuroscience} panel (LS5, secondary) to judge its biological plausibility and systems-neuroscience modelling. A single panel would lack the dual expertise to assess \project's core contribution: the bidirectional integration of brain-inspired computation and modern machine learning.
 
 \newpage

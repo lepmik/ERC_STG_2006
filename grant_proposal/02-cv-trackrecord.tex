@@ -4,8 +4,6 @@
 % Header: Lepperød — FIND — Part B1
 
 \newpage
-% Visible red TODO markers for facts only the PI can supply — remove before submission.
-\newcommand{\pitodo}[1]{\textcolor{red}{[TODO: #1]}}
 \section{Curriculum Vitae and Track Record}
 
 \subsection*{Personal details}
@@ -44,16 +42,16 @@
 The following ten outputs demonstrate my trajectory from experimental neuroscience to neuro-inspired AI, establishing the foundations for FIND:
 
 \begin{enumerate}[noitemsep,topsep=2pt]
-  \item \textbf{Lepperød ME} et al.\ \textit{Optogenetic pacing of medial septum parvalbumin-positive cells disrupts temporal but not spatial firing in grid cells}. Science Advances, 2021.
+  \item \textbf{Lepperød ME}, Christensen AC, Lensjø KK, Buccino AP, Yu J, Fyhn M, Hafting T. \textit{Optogenetic pacing of medial septum parvalbumin-positive cells disrupts temporal but not spatial firing in grid cells}. Science Advances, 2021.
   \textit{Role: First author, conceived and led the study. Significance: Established causal evidence for temporal coding in the entorhinal cortex, directly motivating the temporal predictive coding component of PAM.}
 
-  \item \textbf{Lepperød ME} et al.\ \textit{Inferring causal connectivity from pairwise recordings and optogenetics}. PLoS Computational Biology, 2022. (With K.\ Kording.)
+  \item \textbf{Lepperød ME}, Stöber T, Hafting T, Fyhn M, Kording KP. \textit{Inferring causal connectivity from pairwise recordings and optogenetics}. PLoS Computational Biology, 2023.
   \textit{Role: First author. Significance: Developed quasi-experimental methods for causal inference in neural circuits, grounding FIND's causal reasoning objectives.}
 
-  \item Schøyen VS$^*$, Pettersen MB$^*$, \ldots, \textbf{Lepperød ME}. \textit{Coherently remapping toroidal cells but not grid cells are responsible for path integration in virtual agents}. iScience, 2023.
+  \item Schøyen VS$^*$, Pettersen MB$^*$, Holzhausen K, Fyhn M, Malthe-Sørenssen A, \textbf{Lepperød ME}. \textit{Coherently remapping toroidal cells but not grid cells are responsible for path integration in virtual agents}. iScience, 2023.
   \textit{Role: Senior/corresponding author, supervised the project. Significance: Showed that AI agents spontaneously develop biologically consistent spatial cells, establishing our lab's cognitive map expertise.}
 
-  \item Pettersen MB, Schøyen VS, Malthe-Sørenssen A, \textbf{Lepperød ME}. \textit{Decoding the cognitive map: Learning place cells and remapping}. eLife, 2024.
+  \item Pettersen MB, Schøyen VS, Malthe-Sørenssen A, \textbf{Lepperød ME}. \textit{Learning place cells and remapping by decoding the cognitive map}. eLife, 2025.
   \textit{Role: Senior/corresponding author. Significance: Demonstrated context-dependent memory through orthogonal remapping, key to FIND's modular memory design.}
 
   \item Pettersen MB, Rogge F, \textbf{Lepperød ME}. \textit{Learning place cell representations and context-dependent remapping}. NeurIPS, 2024.
@@ -68,7 +66,7 @@ The following ten outputs demonstrate my trajectory from experimental neuroscien
   \item Guichard E, Reimers F, Kvalsund MK, \textbf{Lepperød M}, Nichele S. \textit{ARC-NCA: Towards developmental solutions to the Abstraction and Reasoning Corpus}. ALife, 2025. Featured on Machine Learning Street Talk podcast.
   \textit{Role: Co-supervisor. Significance: Demonstrated abstract reasoning through developmental self-organization, informing WP2's compositional reasoning.}
 
-  \item Schøyen VS et al.\ \textit{Hexagons all the way down: Grid cells as a conformal isometric map of space}. PLOS Computational Biology, 2025.
+  \item Schøyen VS, Beshkov K, Pettersen MB, Hermansen E, Holzhausen K, Malthe-Sørenssen A, Fyhn M, \textbf{Lepperød ME}. \textit{Hexagons all the way down: Grid cells as a conformal isometric map of space}. PLOS Computational Biology, 2025.
   \textit{Role: Senior/corresponding author. Significance: Provided geometric theory of neural representations, informing HDC integration in PAM.}
 
   \item Danielli K, \textbf{Lepperød ME}. \textit{A bio-inspired minimal model for non-stationary K-armed bandits}. Biological Cybernetics, 2026.
@@ -98,13 +96,13 @@ The following ten outputs demonstrate my trajectory from experimental neuroscien
 
 \subsection*{Research software and ML systems engineering}
 
-\noindent\textbf{PAM / PAMNCA codebases:} Large-scale ML engineering behind the preliminary results in this proposal: systematic GPU-cluster experimentation ($\sim$15K GPU-hours on A40s), automated result parsing from 150+ log files, reproducible evaluation pipelines, and benchmarking across 5 real-world domains (CORe50, MIT-BIH, ESC-50, VoxCeleb, embodied navigation) using official online continual-learning protocols. \pitodo{repository URL and open-source release status}
+\noindent\textbf{PAM / PAMNCA codebases:} Large-scale ML engineering behind the preliminary results in this proposal: systematic GPU-cluster experimentation ($\sim$15K GPU-hours on A40s), automated result parsing from 150+ log files, reproducible evaluation pipelines, and continual-learning benchmarking on CORe50 using the official online (NI) protocol.
 
-\noindent\textbf{Community research infrastructure:} Co-developed NEST simulator modules within the Human Brain Project; co-developed the Exdir hierarchical data format and the Expipe experiment-management platform for reproducible neuroscience pipelines. \pitodo{adoption indicators: downloads/stars/citing labs for Exdir and Expipe}
+\noindent\textbf{Community research infrastructure:} Co-developed NEST simulator modules within the Human Brain Project; co-developed the Exdir hierarchical data format and the Expipe experiment-management platform for reproducible neuroscience pipelines.
 
-\noindent\textbf{Benchmark contributions:} Evaluation on official public protocols (CORe50-NI, ARC). \pitodo{public leaderboard entries or benchmark submissions, if any}
+\noindent\textbf{Benchmark contributions:} Evaluation on official public protocols (CORe50-NI, ARC).
 
-\noindent\textbf{Team profile to complement the PI:} The FIND postdoc will be recruited from the ML systems community (target profile: PhD from an ICLR/ICML-publishing lab with large-scale training experience) to complement the PI's neuroscience background and own the WP2--3 scaling infrastructure. \pitodo{1--2 sentences on candidate pipeline, e.g.\ named ELLIS/NORA contacts}
+\noindent\textbf{Team profile to complement the PI:} The FIND postdoc will be recruited from the ML systems community (target profile: PhD from an ICLR/ICML-publishing lab with large-scale training experience) to complement the PI's neuroscience background and own the WP2--3 scaling infrastructure.
 
 \subsection*{Additional information}
 

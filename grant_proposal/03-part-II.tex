@@ -10,11 +10,11 @@ This section details the research methodology, work plan, and risk assessment fo
 
 \textbf{Research questions:}
 \begin{itemize}[noitemsep,topsep=2pt]
-  \item Q1: How can memory-augmented modules distribute and combine long-term temporal information?
-  \item Q2: How can such modules support active inference and causal reasoning?
-  \item Q3: How can neurosymbolic components be integrated into distributed memory architectures without sacrificing gradient-based learning?
-  \item Q4: Does this integration measurably enhance compositional reasoning in complex environments?
-  \item Q5: Can such networks learn adaptively and reason about causal relations over long time horizons?
+  \item RQ1: How can memory-augmented modules distribute and combine long-term temporal information?
+  \item RQ2: How can such modules support active inference and causal reasoning?
+  \item RQ3: How can neurosymbolic components be integrated into distributed memory architectures without sacrificing gradient-based learning?
+  \item RQ4: Does this integration measurably enhance compositional reasoning in complex environments?
+  \item RQ5: Can such networks learn adaptively and reason about causal relations over long time horizons?
 \end{itemize}
 
 \subsection{Research methodology}
@@ -26,11 +26,11 @@ The core update equations underpin PAM's mechanisms. Each module $m$ has latent 
 \end{enumerate}
 \noindent We commit to \textbf{NCA + message passing} as the primary orchestration mechanisms, supported by our PAMNCA results where NCA + distributed memory outperforms no-memory variants by 30--43\%. Four further mechanisms form a structured ablation ladder in WP2: \textit{Hypernetwork}, \textit{Predictive routing}, \textit{Competitive collaboration}, and \textit{Energy-based orchestration}---ordered by increasing biological plausibility and implementation complexity.
 
-\subsubsection*{WP1: Temporal Predictive Coding with Distributed Memory \textnormal{(Lepperød, PhD1; Q1; Years 1--3)}}
+\subsubsection*{WP1: Temporal Predictive Coding with Distributed Memory \textnormal{(Lepperød, PhD1; RQ1; Years 1--3)}}
 
 WP1 establishes the core PAM architecture for temporal prediction and memory. Building on our preliminary results ($98.1\%$ exact recall at $\sigma{=}0.4$, $3.75{\times}$ less forgetting than tPC-alone), WP1 extends the architecture to challenging temporal benchmarks and characterizes its operational regime.
 
-\noindent\textbf{Benchmark strategy.} We adopt a four-tier evaluation hierarchy designed to systematically validate PAM's capabilities and position it against the state of the art:
+\noindent\textbf{Benchmark strategy.} We adopt a four-tier evaluation hierarchy (Figure~\ref{fig:tiers}) designed to systematically validate PAM's capabilities and position it against the state of the art:
 \begin{itemize}[noitemsep,topsep=2pt]
 \item \textbf{Tier~1 --- Validation:} Synthetic tasks (Copy Task $T{=}100$--$5{,}000$; Adding Problem) and our existing MNIST/Omniglot benchmarks. These confirm core memory mechanisms work before scaling.
 \item \textbf{Tier~2 --- Field positioning:} Standard time series forecasting benchmarks (ETT, Weather, ECL, Traffic) at horizons $\{96, 192, 336, 720\}$. Compared against DLinear, PatchTST~\cite{nie2023patchtst}, iTransformer~\cite{liu2024itransformer}, and Mamba using MSE/MAE metrics. These establish PAM's competitiveness with purpose-built forecasting models.
@@ -56,7 +56,7 @@ Systematically characterise the recall--noise--capacity landscape across $\sigma
 \paragraph{T1.3: Hierarchical Temporal Compression for Long-Horizon Memory}
 Extend PAM with hierarchical time-scale factorisation: fast modules ($\Delta t{=}1$) process step-level inputs while slow modules compress episodes into semantic summaries via learned gating inspired by complementary learning systems~\cite{ramapuram2021kanerva}. The gating criterion---whether and when prediction error triggers consolidation from episodic to semantic memory---will be resolved experimentally using prediction-error statistics from T1.2. T1.3 also develops \textit{key reconsolidation}: periodically re-encoding stored memory keys with the current encoder so that content-addressable retrieval survives representation drift when the encoder learns online (the mechanism behind the 100\% frozen-feature vs.\ 70.3\% online-encoder gap on CORe50, Part~I). Evaluate on Tier~3 benchmarks: ``infinite dSprites'' ($T{=}2{,}000$--$50{,}000$) and Memory Maze ($T{=}2{,}000$--$10{,}000$)~\cite{pasukonis2022evaluating}. The key test is \textbf{Path-X} ($T{=}16{,}384$): only S4, Mamba, and a few others solve this benchmark; success here would demonstrate that HDC memory with iterative inference can match purpose-engineered SSMs on ultra-long-range tasks.
 
-\subsubsection*{WP2: Causal Reasoning and Compositional Understanding \textnormal{(Lepperød, PD; Q2--Q4; Years 2--4)}}
+\subsubsection*{WP2: Causal Reasoning and Compositional Understanding \textnormal{(Lepperød, PD; RQ2--RQ4; Years 2--4)}}
 
 WP2 extends PAM with active inference, causal world model learning, and subspace-based compositional reasoning. This WP integrates neurosymbolic components for explicit reasoning alongside statistical learning, while enabling the system to discover causal structure through interventions.
 
@@ -75,14 +75,14 @@ Develop mechanisms for compositional, subspace-based reasoning within the PAM ar
 \end{figure}
 
 \paragraph{T2.3: Causal World Model Learning through Active Inference}
-Implement active inference for action selection balancing information gain and goal-oriented reward~\cite{friston2010free,rao2023active}. Expected free energy is made tractable by amortization: a learned policy posterior scores candidate sub-goals represented as HDC goal vectors, so planning operates in symbol space over bound sub-goal compositions rather than exhaustive state-space rollouts. Develop causal discovery mechanisms through interventionist exploration: the agent executes targeted interventions (changing one variable while holding others fixed), observes the downstream effects, and updates its world model to encode directional causal relationships rather than mere correlations. This follows the ``interventionist'' approach to causal learning~\cite{scholkopf2021causal}: modules learn not just that ``opening a chest produces items'' but that ``the chest \textit{caused} items to appear,'' enabling counterfactual reasoning (``what if I hadn't opened the chest?''). Build on our work with NCA~\cite{kvalsund2024nca,kvalsund2026sensor} and proximal policy optimization~\cite{schulman2017ppo} for credit assignment.
+Implement active inference for action selection balancing information gain and goal-oriented reward~\cite{friston2010free,rao2023active}. Expected free energy is made tractable by amortization: a learned policy posterior scores candidate sub-goals represented as HDC goal vectors, so planning operates in symbol space over bound sub-goal compositions rather than exhaustive state-space rollouts. Develop causal discovery mechanisms through interventionist exploration: the agent executes targeted interventions (changing one variable while holding others fixed), observes the downstream effects, and updates its world model to encode directional causal relationships rather than mere correlations. This follows the ``interventionist'' approach to causal learning~\cite{scholkopf2021causal}: modules learn not just that ``opening a chest produces items'' but that ``the chest \textit{caused} items to appear,'' enabling counterfactual reasoning (``what if I hadn't opened the chest?''). Build on our work with NCA~\cite{kvalsund2026sensor} and proximal policy optimization~\cite{schulman2017ppo} for credit assignment.
 \textit{Success criterion:} PAM with active-inference exploration must reach task completion $2{\times}$ faster than standard PPO on at least two benchmark environments.
 
 \paragraph{T2.4: Orchestration Ablation and Evaluation}
 Execute comprehensive ablation studies to quantify the contribution of each orchestration mechanism, distributed memory, and neurosymbolic component. Evaluate PAM on few-shot continuous control~\cite{mete2024few,yu2019meta} and long-horizon planning~\cite{pasukonis2022evaluating}. Investigate how PAM's computations map onto neural circuits by extending our established RNN framework~\cite{schoyen2023coherently,pettersen2024elife,pettersen2024nips} that demonstrates spontaneous development of grid, place, and border cells.
 \textit{Success criterion:} PAM must achieve ${>}10$ percentage point improvement over LSTM baseline on Memory Maze ($T{>}500$ steps)---a deliberately intermediate gate; WP3 raises the bar to $T{=}10{,}000$ against stronger baselines (DQN, Dreamer). Orchestration ablations must show primary NCA/message-passing design outperforms at least two alternatives.
 
-\subsubsection*{WP3: Long-Horizon Adaptation in Open-Ended Environments \textnormal{(Lepperød, PhD2; Q4--Q5; Years 3--5)}}
+\subsubsection*{WP3: Long-Horizon Adaptation in Open-Ended Environments \textnormal{(Lepperød, PhD2; RQ4--RQ5; Years 3--5)}}
 
 WP3 stress-tests PAM in environments demanding sophisticated planning, resource management, and adaptation to ever-changing dynamics. We adopt a tiered ambition structure:
 \begin{itemize}[noitemsep,topsep=2pt]
