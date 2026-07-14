@@ -21,13 +21,13 @@ Consider an agent managing a Factorio production chain (Figure~\ref{fig:factorio
 
 \subsection{Ground-breaking nature and impact}
 
-FIND rests on a single bet: that predictive coding over distributed, content-addressable memory---the brain's mechanism for selective long-horizon recall---is the substrate flexible AI is missing. We develop \textbf{PAM} (\textbf{P}redictive \textbf{A}ctive temporal coding with distributed \textbf{M}emory), a flat modular architecture built on one principle: \textbf{minimising prediction error over a shared memory}. That memory is a content-addressable distributed store~\cite{wu2018kanerva,kanerva2003sparse} whose contents are hyperdimensional vectors~\cite{kanerva2009hyperdimensional}, so recall and symbolic composition (binding, superposition) share one space. Every other mechanism is a way of touching that memory:
+FIND rests on a single bet: that predictive coding over distributed, content-addressable memory---the brain's mechanism for selective long-horizon recall---is the substrate flexible AI is missing. We develop \textbf{PAM} (\textbf{P}redictive \textbf{A}ctive \textbf{M}emory), a flat modular architecture built on one principle: \textbf{minimising prediction error over a shared memory}. That memory is a content-addressable distributed store~\cite{wu2018kanerva,kanerva2003sparse} whose contents are hyperdimensional vectors~\cite{kanerva2009hyperdimensional}, so recall and symbolic composition (binding, superposition) share one space. Every other mechanism is a way of touching that memory:
 \begin{itemize}[noitemsep,topsep=2pt]
   \item \textbf{Encode:} temporal predictive coding denoises each observation into a clean latent before it is stored, so memory holds high-SNR content rather than raw input.
   \item \textbf{Retrieve:} content-addressable read by similarity, with HDC binding making retrieval compositional and symbolic.
   \item \textbf{Act:} active inference selects actions that bring incoming input into line with what memory predicts~\cite{friston2010free,rao2023active}, closing the perception--action loop on the same objective while gathering experience that updates memory.
 \end{itemize}
-\noindent Learned routing orchestrates which modules read and write when. The name states the design: \textbf{P}redictive coding encodes, distributed \textbf{M}emory retrieves, \textbf{A}ctive inference acts.
+\noindent Learned routing orchestrates which modules read and write when. The name is the thesis: a \textbf{P}redictive, \textbf{A}ctive \textbf{M}emory---predictive coding encodes, active inference acts, and content-addressable read retrieves.
 
 \noindent\textbf{FIND's novelty} is this unification: it sits at the intersection of three established fields in a configuration no prior system has achieved simultaneously:
 \begin{itemize}[noitemsep,topsep=2pt]
