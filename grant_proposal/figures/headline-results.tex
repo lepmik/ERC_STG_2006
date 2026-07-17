@@ -37,14 +37,14 @@
 % baseline (x-axis)
 \draw[black!40, thick] (-0.4,0) -- (12.2,0);
 
-% Group 1 — WP1 foundation: sequence recall under noise
-\bargroup{0.3}{98.1}{56}{Exact recall @ $\sigma{=}0.4$}{PAM vs.\ feedforward CNN-KM\\($K{=}100$ items, 20 trials)}{wpblue}{WP1}
+% Group 1 — WP1 foundation: associative memory substrate
+\bargroup{0.3}{94}{23}{Exact recall @ 32 pairs}{Kanerva/HDC substrate vs.\ transformer\\(assoc.\ recall, 2k-step budget)}{wpblue}{WP1}
 
 % Group 2 — WP1: real-world continual learning
-\bargroup{4.6}{100}{44.5}{CORe50 re-encounter}{PAM vs.\ S4D, official NI protocol\\(50 objects, $T{=}10{,}000$)}{wpblue}{WP1}
+\bargroup{4.6}{92.5}{87.7}{CORe50-NI class-incr.}{PAM memory vs.\ gradient-trained ER\\(frozen DINOv2, single-pass online)}{wpblue}{WP1}
 
 % Group 3 — WP2: compositional program synthesis
-\bargroup{8.9}{24.7}{12}{ARC exact match}{PAMNCA: 1.47M params, no pretraining\\(321/1302 episodes; GPT-4o: 12\%)}{wpred}{WP2}
+\bargroup{8.9}{40}{12}{ARC exact match}{PAMNCA: 1.47M params, no pretraining\\(leave-one-out; GPT-4o: 12\%)}{wpred}{WP2}
 
 % Legend
 \node[anchor=west, font=\scriptsize\sffamily] (leg) at (-0.4, 100*\ys+1.15) {};
